@@ -8,694 +8,136 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0d1117;
-    --surface: #161b22;
-    --surface2: #1c2128;
-    --border: #30363d;
-    --border-light: #21262d;
-    --accent: #00c896;
-    --accent2: #0099ff;
-    --accent3: #ff6b6b;
-    --text: #e6edf3;
-    --text-muted: #7d8590;
-    --text-dim: #484f58;
-    --tag-bg: #1f2d3d;
-    --warn: #f0a835;
+    --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;
+    --border:#30363d;--border-light:#21262d;
+    --accent:#00c896;--accent2:#0099ff;--accent3:#ff6b6b;
+    --text:#e6edf3;--text-muted:#7d8590;--text-dim:#484f58;
+    --tag-bg:#1f2d3d;--warn:#f0a835;
   }
-
-- { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-font-family: ‘DM Sans’, sans-serif;
-background: var(–bg);
-color: var(–text);
-min-height: 100vh;
-overflow-x: hidden;
-}
-
-/* HEADER */
-header {
-background: var(–surface);
-border-bottom: 1px solid var(–border);
-padding: 0 32px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-height: 64px;
-position: sticky;
-top: 0;
-z-index: 100;
-}
-
-.logo {
-display: flex;
-align-items: center;
-gap: 12px;
-}
-
-.logo-icon {
-width: 36px;
-height: 36px;
-background: linear-gradient(135deg, var(–accent), var(–accent2));
-border-radius: 8px;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 18px;
-}
-
-.logo-text {
-font-family: ‘Instrument Serif’, serif;
-font-size: 22px;
-letter-spacing: -0.3px;
-color: var(–text);
-}
-
-.logo-sub {
-font-size: 11px;
-color: var(–text-muted);
-font-family: ‘DM Mono’, monospace;
-letter-spacing: 1px;
-text-transform: uppercase;
-}
-
-nav {
-display: flex;
-gap: 4px;
-}
-
-.nav-btn {
-padding: 8px 18px;
-border-radius: 6px;
-border: none;
-cursor: pointer;
-font-family: ‘DM Sans’, sans-serif;
-font-size: 14px;
-font-weight: 500;
-transition: all 0.15s;
-background: transparent;
-color: var(–text-muted);
-}
-
-.nav-btn:hover { background: var(–surface2); color: var(–text); }
-.nav-btn.active { background: var(–accent); color: #000; }
-
-.header-right { display: flex; gap: 10px; align-items: center; }
-
-.badge {
-background: var(–accent);
-color: #000;
-font-size: 11px;
-font-weight: 600;
-padding: 2px 8px;
-border-radius: 20px;
-font-family: ‘DM Mono’, monospace;
-}
-
-/* MAIN LAYOUT */
-.main { display: none; padding: 32px; max-width: 1400px; margin: 0 auto; }
-.main.active { display: block; }
-
-/* === VIEWER === */
-.search-bar-wrap {
-display: flex;
-gap: 12px;
-margin-bottom: 28px;
-align-items: center;
-}
-
-.search-input {
-flex: 1;
-background: var(–surface);
-border: 1px solid var(–border);
-color: var(–text);
-padding: 12px 18px;
-border-radius: 8px;
-font-size: 15px;
-font-family: ‘DM Sans’, sans-serif;
-outline: none;
-transition: border-color 0.15s;
-}
-
-.search-input:focus { border-color: var(–accent); }
-.search-input::placeholder { color: var(–text-dim); }
-
-.filter-select {
-background: var(–surface);
-border: 1px solid var(–border);
-color: var(–text);
-padding: 12px 16px;
-border-radius: 8px;
-font-size: 14px;
-font-family: ‘DM Sans’, sans-serif;
-cursor: pointer;
-outline: none;
-}
-
-.cards-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-gap: 20px;
-}
-
-.card {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 12px;
-overflow: hidden;
-cursor: pointer;
-transition: border-color 0.15s, transform 0.15s;
-}
-
-.card:hover { border-color: var(–accent); transform: translateY(-2px); }
-
-.card-header {
-padding: 18px 20px 14px;
-border-bottom: 1px solid var(–border-light);
-display: flex;
-justify-content: space-between;
-align-items: flex-start;
-}
-
-.card-title {
-font-family: ‘Instrument Serif’, serif;
-font-size: 19px;
-line-height: 1.3;
-color: var(–text);
-margin-bottom: 4px;
-}
-
-.card-surgeon {
-font-size: 13px;
-color: var(–accent);
-font-family: ‘DM Mono’, monospace;
-}
-
-.card-specialty {
-font-size: 11px;
-color: var(–text-muted);
-background: var(–surface2);
-border: 1px solid var(–border);
-padding: 3px 10px;
-border-radius: 20px;
-white-space: nowrap;
-margin-top: 4px;
-font-family: ‘DM Mono’, monospace;
-}
-
-.card-body { padding: 16px 20px; }
-
-.card-row {
-display: flex;
-gap: 8px;
-flex-wrap: wrap;
-margin-bottom: 10px;
-}
-
-.card-row:last-child { margin-bottom: 0; }
-
-.card-label {
-font-size: 10px;
-font-weight: 600;
-letter-spacing: 1px;
-text-transform: uppercase;
-color: var(–text-dim);
-font-family: ‘DM Mono’, monospace;
-margin-bottom: 5px;
-}
-
-.tag {
-font-size: 12px;
-background: var(–tag-bg);
-border: 1px solid var(–border);
-color: var(–text-muted);
-padding: 2px 10px;
-border-radius: 4px;
-font-family: ‘DM Mono’, monospace;
-}
-
-.tag.green { background: rgba(0,200,150,0.1); border-color: rgba(0,200,150,0.3); color: var(–accent); }
-.tag.blue { background: rgba(0,153,255,0.1); border-color: rgba(0,153,255,0.3); color: var(–accent2); }
-.tag.red { background: rgba(255,107,107,0.1); border-color: rgba(255,107,107,0.3); color: var(–accent3); }
-.tag.warn { background: rgba(240,168,53,0.1); border-color: rgba(240,168,53,0.3); color: var(–warn); }
-
-.card-footer {
-padding: 10px 20px;
-border-top: 1px solid var(–border-light);
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-
-.card-date { font-size: 11px; color: var(–text-dim); font-family: ‘DM Mono’, monospace; }
-
-.empty-state {
-text-align: center;
-padding: 80px 20px;
-color: var(–text-muted);
-}
-
-.empty-state .big { font-size: 48px; margin-bottom: 16px; }
-.empty-state h3 { font-family: ‘Instrument Serif’, serif; font-size: 24px; margin-bottom: 8px; color: var(–text); }
-.empty-state p { font-size: 14px; color: var(–text-muted); }
-
-/* === MODAL (Full Card View) === */
-.modal-overlay {
-display: none;
-position: fixed;
-inset: 0;
-background: rgba(0,0,0,0.7);
-z-index: 200;
-align-items: center;
-justify-content: center;
-padding: 20px;
-}
-
-.modal-overlay.open { display: flex; }
-
-.modal {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 16px;
-width: 100%;
-max-width: 800px;
-max-height: 90vh;
-overflow-y: auto;
-position: relative;
-}
-
-.modal-header {
-padding: 28px 32px 20px;
-border-bottom: 1px solid var(–border);
-display: flex;
-justify-content: space-between;
-align-items: flex-start;
-position: sticky;
-top: 0;
-background: var(–surface);
-z-index: 1;
-}
-
-.modal-title { font-family: ‘Instrument Serif’, serif; font-size: 28px; margin-bottom: 6px; }
-.modal-meta { font-size: 13px; color: var(–text-muted); display: flex; gap: 16px; flex-wrap: wrap; }
-.modal-meta span { display: flex; align-items: center; gap: 4px; }
-
-.close-btn {
-background: var(–surface2);
-border: 1px solid var(–border);
-color: var(–text);
-width: 36px;
-height: 36px;
-border-radius: 8px;
-font-size: 18px;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-shrink: 0;
-}
-
-.close-btn:hover { background: var(–accent3); border-color: var(–accent3); color: #fff; }
-
-.modal-body { padding: 28px 32px; }
-
-.section {
-margin-bottom: 28px;
-}
-
-.section-title {
-font-size: 11px;
-font-weight: 600;
-letter-spacing: 1.5px;
-text-transform: uppercase;
-color: var(–accent);
-font-family: ‘DM Mono’, monospace;
-margin-bottom: 12px;
-padding-bottom: 8px;
-border-bottom: 1px solid var(–border-light);
-display: flex;
-align-items: center;
-gap: 8px;
-}
-
-.tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
-
-.item-entry {
-display: flex;
-flex-direction: column;
-gap: 4px;
-margin-bottom: 10px;
-}
-.item-entry:last-child { margin-bottom: 0; }
-.item-name-row { display: flex; align-items: center; gap: 8px; }
-.item-instr {
-font-size: 12px;
-color: var(–accent2);
-background: rgba(0,153,255,0.07);
-border: 1px solid rgba(0,153,255,0.2);
-border-radius: 5px;
-padding: 5px 12px;
-margin-left: 4px;
-line-height: 1.5;
-font-family: ‘DM Sans’, sans-serif;
-}
-
-.notes-box {
-background: var(–surface2);
-border: 1px solid var(–border);
-border-radius: 8px;
-padding: 14px 16px;
-font-size: 14px;
-color: var(–text-muted);
-line-height: 1.6;
-white-space: pre-wrap;
-font-family: ‘DM Sans’, sans-serif;
-}
-
-.modal-actions {
-display: flex;
-gap: 10px;
-padding: 20px 32px;
-border-top: 1px solid var(–border);
-background: var(–surface);
-position: sticky;
-bottom: 0;
-}
-
-/* === BUILDER === */
-.builder-layout {
-display: grid;
-grid-template-columns: 1fr 380px;
-gap: 28px;
-align-items: start;
-}
-
-.form-card {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 12px;
-overflow: hidden;
-}
-
-.form-section {
-padding: 24px 28px;
-border-bottom: 1px solid var(–border-light);
-}
-
-.form-section:last-child { border-bottom: none; }
-
-.form-section-title {
-font-size: 11px;
-font-weight: 600;
-letter-spacing: 1.5px;
-text-transform: uppercase;
-color: var(–accent);
-font-family: ‘DM Mono’, monospace;
-margin-bottom: 16px;
-display: flex;
-align-items: center;
-gap: 8px;
-}
-
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.form-grid.cols3 { grid-template-columns: 1fr 1fr 1fr; }
-.form-full { grid-column: 1 / -1; }
-
-label {
-display: block;
-font-size: 12px;
-color: var(–text-muted);
-margin-bottom: 6px;
-font-weight: 500;
-letter-spacing: 0.3px;
-}
-
-input[type=“text”], input[type=“number”], select, textarea {
-width: 100%;
-background: var(–surface2);
-border: 1px solid var(–border);
-color: var(–text);
-padding: 10px 14px;
-border-radius: 7px;
-font-size: 14px;
-font-family: ‘DM Sans’, sans-serif;
-outline: none;
-transition: border-color 0.15s;
-}
-
-input:focus, select:focus, textarea:focus { border-color: var(–accent); }
-textarea { resize: vertical; min-height: 80px; }
-
-.multi-input-row {
-display: flex;
-gap: 8px;
-margin-bottom: 4px;
-align-items: center;
-}
-
-.multi-input-row input { flex: 1; }
-
-.item-block { margin-bottom: 10px; }
-
-.instr-toggle {
-background: none;
-border: 1px solid var(–border);
-color: var(–text-dim);
-width: 32px;
-height: 32px;
-border-radius: 6px;
-cursor: pointer;
-font-size: 13px;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-shrink: 0;
-transition: all 0.1s;
-position: relative;
-}
-.instr-toggle:hover { border-color: var(–accent2); color: var(–accent2); }
-.instr-toggle.has-notes { border-color: rgba(0,153,255,0.5); color: var(–accent2); background: rgba(0,153,255,0.08); }
-
-.instr-row {
-display: none;
-padding: 6px 0 4px 40px;
-}
-.instr-row.open { display: block; }
-.instr-row input {
-width: 100%;
-background: rgba(0,153,255,0.05);
-border: 1px solid rgba(0,153,255,0.25);
-color: var(–text-muted);
-padding: 7px 12px;
-border-radius: 6px;
-font-size: 12px;
-font-family: ‘DM Sans’, sans-serif;
-outline: none;
-}
-.instr-row input:focus { border-color: var(–accent2); }
-.instr-row input::placeholder { color: var(–text-dim); }
-
-.remove-btn {
-background: none;
-border: 1px solid var(–border);
-color: var(–text-dim);
-width: 32px;
-height: 32px;
-border-radius: 6px;
-cursor: pointer;
-font-size: 16px;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-shrink: 0;
-transition: all 0.1s;
-}
-
-.remove-btn:hover { background: var(–accent3); border-color: var(–accent3); color: #fff; }
-
-.add-item-btn {
-background: none;
-border: 1px dashed var(–border);
-color: var(–text-muted);
-padding: 8px 14px;
-border-radius: 6px;
-cursor: pointer;
-font-size: 13px;
-font-family: ‘DM Sans’, sans-serif;
-transition: all 0.15s;
-width: 100%;
-margin-top: 4px;
-}
-
-.add-item-btn:hover { border-color: var(–accent); color: var(–accent); }
-
-/* Buttons */
-.btn {
-padding: 10px 20px;
-border-radius: 8px;
-border: none;
-cursor: pointer;
-font-family: ‘DM Sans’, sans-serif;
-font-size: 14px;
-font-weight: 600;
-transition: all 0.15s;
-display: inline-flex;
-align-items: center;
-gap: 6px;
-}
-
-.btn-primary { background: var(–accent); color: #000; }
-.btn-primary:hover { background: #00e0a8; }
-.btn-secondary { background: var(–surface2); color: var(–text); border: 1px solid var(–border); }
-.btn-secondary:hover { border-color: var(–accent2); color: var(–accent2); }
-.btn-danger { background: rgba(255,107,107,0.15); color: var(–accent3); border: 1px solid rgba(255,107,107,0.3); }
-.btn-danger:hover { background: var(–accent3); color: #fff; }
-.btn-sm { padding: 7px 14px; font-size: 13px; }
-
-/* PREVIEW */
-.preview-card {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 12px;
-overflow: hidden;
-position: sticky;
-top: 88px;
-}
-
-.preview-header {
-padding: 16px 20px;
-background: linear-gradient(135deg, rgba(0,200,150,0.1), rgba(0,153,255,0.1));
-border-bottom: 1px solid var(–border);
-}
-
-.preview-title-text { font-size: 12px; color: var(–accent); font-family: ‘DM Mono’, monospace; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
-.preview-procedure { font-family: ‘Instrument Serif’, serif; font-size: 20px; }
-.preview-surgeon-name { font-size: 13px; color: var(–accent); font-family: ‘DM Mono’, monospace; margin-top: 4px; }
-
-.preview-body { padding: 16px 20px; }
-
-.preview-section { margin-bottom: 16px; }
-.preview-section-label { font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(–text-dim); font-family: ‘DM Mono’, monospace; margin-bottom: 6px; }
-
-.preview-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-.preview-tag { font-size: 11px; background: var(–tag-bg); border: 1px solid var(–border); color: var(–text-muted); padding: 2px 8px; border-radius: 3px; font-family: ‘DM Mono’, monospace; }
-
-.form-actions { display: flex; gap: 10px; padding: 20px 28px; border-top: 1px solid var(–border); justify-content: flex-end; }
-
-/* ALERTS */
-.alert {
-position: fixed;
-bottom: 24px;
-right: 24px;
-background: var(–surface);
-border: 1px solid var(–accent);
-color: var(–text);
-padding: 14px 20px;
-border-radius: 10px;
-font-size: 14px;
-z-index: 999;
-display: none;
-align-items: center;
-gap: 10px;
-box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-animation: slideUp 0.3s ease;
-}
-
-.alert.show { display: flex; }
-
-@keyframes slideUp {
-from { transform: translateY(20px); opacity: 0; }
-to { transform: translateY(0); opacity: 1; }
-}
-
-/* Stats bar */
-.stats-bar {
-display: flex;
-gap: 24px;
-margin-bottom: 24px;
-padding: 16px 20px;
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 10px;
-flex-wrap: wrap;
-}
-
-.stat { display: flex; flex-direction: column; }
-.stat-value { font-family: ‘Instrument Serif’, serif; font-size: 26px; color: var(–accent); }
-.stat-label { font-size: 11px; color: var(–text-muted); font-family: ‘DM Mono’, monospace; }
-
-.divider { width: 1px; background: var(–border); }
-
-/* Responsive */
-@media (max-width: 900px) {
-.builder-layout { grid-template-columns: 1fr; }
-.preview-card { position: static; }
-.form-grid { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 600px) {
-header { padding: 0 16px; }
-.main { padding: 16px; }
-.modal-header, .modal-body, .modal-actions { padding-left: 20px; padding-right: 20px; }
-}
-
-.no-results { text-align: center; padding: 60px; color: var(–text-muted); }
-
-.edit-indicator {
-background: rgba(0,153,255,0.15);
-border: 1px solid rgba(0,153,255,0.4);
-color: var(–accent2);
-padding: 10px 16px;
-border-radius: 8px;
-font-size: 13px;
-margin-bottom: 20px;
-display: none;
-align-items: center;
-gap: 8px;
-}
-.edit-indicator.show { display: flex; }
-
-/* AUTOCOMPLETE */
-.ac-wrap { position: relative; flex: 1; }
-.ac-dropdown {
-position: absolute;
-top: calc(100% + 4px);
-left: 0; right: 0;
-background: var(–surface2);
-border: 1px solid var(–accent);
-border-radius: 8px;
-z-index: 500;
-max-height: 200px;
-overflow-y: auto;
-box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-display: none;
-}
-.ac-dropdown.open { display: block; }
-.ac-item {
-padding: 9px 14px;
-font-size: 13px;
-color: var(–text-muted);
-cursor: pointer;
-font-family: ‘DM Mono’, monospace;
-border-bottom: 1px solid var(–border-light);
-display: flex;
-align-items: center;
-gap: 8px;
-transition: background 0.1s;
-}
-.ac-item:last-child { border-bottom: none; }
-.ac-item:hover, .ac-item.focused { background: var(–surface); color: var(–text); }
-.ac-item .ac-match { color: var(–accent); }
-.ac-item .ac-count { margin-left: auto; font-size: 10px; color: var(–text-dim); }
-
-/* plain text inputs in form that get autocomplete keep normal styling */
-.multi-input-row .ac-wrap input { flex: 1; width: 100%; }
-
-/* single-field ac wraps */
-.field-ac-wrap { position: relative; }
-.field-ac-wrap .ac-dropdown { }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+  .logo{display:flex;align-items:center;gap:12px}
+  .logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px}
+  .logo-text{font-family:'Instrument Serif',serif;font-size:22px;letter-spacing:-0.3px}
+  .logo-sub{font-size:11px;color:var(--text-muted);font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase}
+  nav{display:flex;gap:4px}
+  .nav-btn{padding:8px 18px;border-radius:6px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;transition:all .15s;background:transparent;color:var(--text-muted)}
+  .nav-btn:hover{background:var(--surface2);color:var(--text)}
+  .nav-btn.active{background:var(--accent);color:#000}
+  .header-right{display:flex;gap:10px;align-items:center}
+  .badge{background:var(--accent);color:#000;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;font-family:'DM Mono',monospace}
+  .main{display:none;padding:32px;max-width:1400px;margin:0 auto}
+  .main.active{display:block}
+  .search-bar-wrap{display:flex;gap:12px;margin-bottom:28px;align-items:center}
+  .search-input{flex:1;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:12px 18px;border-radius:8px;font-size:15px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .15s}
+  .search-input:focus{border-color:var(--accent)}
+  .search-input::placeholder{color:var(--text-dim)}
+  .filter-select{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:12px 16px;border-radius:8px;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;outline:none}
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .15s,transform .15s}
+  .card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .card-header{padding:18px 20px 14px;border-bottom:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:flex-start}
+  .card-title{font-family:'Instrument Serif',serif;font-size:19px;line-height:1.3;margin-bottom:4px}
+  .card-surgeon{font-size:13px;color:var(--accent);font-family:'DM Mono',monospace}
+  .card-specialty{font-size:11px;color:var(--text-muted);background:var(--surface2);border:1px solid var(--border);padding:3px 10px;border-radius:20px;white-space:nowrap;margin-top:4px;font-family:'DM Mono',monospace}
+  .card-body{padding:16px 20px}
+  .card-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  .card-row:last-child{margin-bottom:0}
+  .card-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-dim);font-family:'DM Mono',monospace;margin-bottom:5px}
+  .tag{font-size:12px;background:var(--tag-bg);border:1px solid var(--border);color:var(--text-muted);padding:2px 10px;border-radius:4px;font-family:'DM Mono',monospace}
+  .tag.green{background:rgba(0,200,150,.1);border-color:rgba(0,200,150,.3);color:var(--accent)}
+  .tag.blue{background:rgba(0,153,255,.1);border-color:rgba(0,153,255,.3);color:var(--accent2)}
+  .tag.red{background:rgba(255,107,107,.1);border-color:rgba(255,107,107,.3);color:var(--accent3)}
+  .tag.warn{background:rgba(240,168,53,.1);border-color:rgba(240,168,53,.3);color:var(--warn)}
+  .card-footer{padding:10px 20px;border-top:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:center}
+  .card-date{font-size:11px;color:var(--text-dim);font-family:'DM Mono',monospace}
+  .empty-state{text-align:center;padding:80px 20px;color:var(--text-muted)}
+  .empty-state .big{font-size:48px;margin-bottom:16px}
+  .empty-state h3{font-family:'Instrument Serif',serif;font-size:24px;margin-bottom:8px;color:var(--text)}
+  .no-results{text-align:center;padding:60px;color:var(--text-muted)}
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;align-items:center;justify-content:center;padding:20px}
+  .modal-overlay.open{display:flex}
+  .modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:800px;max-height:90vh;overflow-y:auto}
+  .modal-header{padding:28px 32px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;position:sticky;top:0;background:var(--surface);z-index:1}
+  .modal-title{font-family:'Instrument Serif',serif;font-size:28px;margin-bottom:6px}
+  .modal-meta{font-size:13px;color:var(--text-muted);display:flex;gap:16px;flex-wrap:wrap}
+  .modal-meta span{display:flex;align-items:center;gap:4px}
+  .close-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:8px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .close-btn:hover{background:var(--accent3);border-color:var(--accent3);color:#fff}
+  .modal-body{padding:28px 32px}
+  .section{margin-bottom:28px}
+  .section-title{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-family:'DM Mono',monospace;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border-light)}
+  .item-entry{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+  .item-entry:last-child{margin-bottom:0}
+  .item-instr{font-size:12px;color:var(--accent2);background:rgba(0,153,255,.07);border:1px solid rgba(0,153,255,.2);border-radius:5px;padding:5px 12px;margin-left:4px;line-height:1.5}
+  .notes-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px 16px;font-size:14px;color:var(--text-muted);line-height:1.6;white-space:pre-wrap}
+  .modal-actions{display:flex;gap:10px;padding:20px 32px;border-top:1px solid var(--border);background:var(--surface);position:sticky;bottom:0}
+  .builder-layout{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start}
+  .form-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  .form-section{padding:24px 28px;border-bottom:1px solid var(--border-light)}
+  .form-section:last-child{border-bottom:none}
+  .form-section-title{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-family:'DM Mono',monospace;margin-bottom:16px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .form-full{grid-column:1/-1}
+  label{display:block;font-size:12px;color:var(--text-muted);margin-bottom:6px;font-weight:500}
+  input[type="text"],select,textarea{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:7px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .15s}
+  input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+  textarea{resize:vertical;min-height:80px}
+  .item-block{margin-bottom:10px}
+  .multi-input-row{display:flex;gap:8px;margin-bottom:4px;align-items:center}
+  .ac-wrap{position:relative;flex:1}
+  .ac-wrap input{width:100%}
+  .instr-toggle{background:none;border:1px solid var(--border);color:var(--text-dim);width:32px;height:32px;border-radius:6px;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .1s}
+  .instr-toggle:hover{border-color:var(--accent2);color:var(--accent2)}
+  .instr-toggle.has-notes{border-color:rgba(0,153,255,.5);color:var(--accent2);background:rgba(0,153,255,.08)}
+  .remove-btn{background:none;border:1px solid var(--border);color:var(--text-dim);width:32px;height:32px;border-radius:6px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .1s}
+  .remove-btn:hover{background:var(--accent3);border-color:var(--accent3);color:#fff}
+  .instr-row{display:none;padding:4px 0 4px 40px}
+  .instr-row.open{display:block}
+  .instr-row input{background:rgba(0,153,255,.05);border:1px solid rgba(0,153,255,.25);color:var(--text-muted);padding:7px 12px;border-radius:6px;font-size:12px}
+  .instr-row input:focus{border-color:var(--accent2)}
+  .instr-row input::placeholder{color:var(--text-dim)}
+  .add-item-btn{background:none;border:1px dashed var(--border);color:var(--text-muted);padding:8px 14px;border-radius:6px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;transition:all .15s;width:100%;margin-top:4px}
+  .add-item-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .btn{padding:10px 20px;border-radius:8px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+  .btn-primary{background:var(--accent);color:#000}
+  .btn-primary:hover{background:#00e0a8}
+  .btn-secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
+  .btn-secondary:hover{border-color:var(--accent2);color:var(--accent2)}
+  .btn-danger{background:rgba(255,107,107,.15);color:var(--accent3);border:1px solid rgba(255,107,107,.3)}
+  .btn-danger:hover{background:var(--accent3);color:#fff}
+  .btn-sm{padding:7px 14px;font-size:13px}
+  .form-actions{display:flex;gap:10px;padding:20px 28px;border-top:1px solid var(--border);justify-content:flex-end}
+  .preview-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;position:sticky;top:88px}
+  .preview-header{padding:16px 20px;background:linear-gradient(135deg,rgba(0,200,150,.1),rgba(0,153,255,.1));border-bottom:1px solid var(--border)}
+  .preview-title-text{font-size:12px;color:var(--accent);font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
+  .preview-procedure{font-family:'Instrument Serif',serif;font-size:20px}
+  .preview-surgeon-name{font-size:13px;color:var(--accent);font-family:'DM Mono',monospace;margin-top:4px}
+  .preview-body{padding:16px 20px}
+  .preview-section{margin-bottom:16px}
+  .preview-section-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-dim);font-family:'DM Mono',monospace;margin-bottom:6px}
+  .preview-tags{display:flex;flex-wrap:wrap;gap:4px}
+  .preview-tag{font-size:11px;background:var(--tag-bg);border:1px solid var(--border);color:var(--text-muted);padding:2px 8px;border-radius:3px;font-family:'DM Mono',monospace}
+  .stats-bar{display:flex;gap:24px;margin-bottom:24px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:10px;flex-wrap:wrap}
+  .stat{display:flex;flex-direction:column}
+  .stat-value{font-family:'Instrument Serif',serif;font-size:26px;color:var(--accent)}
+  .stat-label{font-size:11px;color:var(--text-muted);font-family:'DM Mono',monospace}
+  .divider{width:1px;background:var(--border)}
+  .edit-indicator{background:rgba(0,153,255,.15);border:1px solid rgba(0,153,255,.4);color:var(--accent2);padding:10px 16px;border-radius:8px;font-size:13px;margin-bottom:20px;display:none;align-items:center;gap:8px}
+  .edit-indicator.show{display:flex}
+  .ac-dropdown{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--surface2);border:1px solid var(--accent);border-radius:8px;z-index:500;max-height:200px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,.5);display:none}
+  .ac-dropdown.open{display:block}
+  .ac-item{padding:9px 14px;font-size:13px;color:var(--text-muted);cursor:pointer;font-family:'DM Mono',monospace;border-bottom:1px solid var(--border-light);transition:background .1s}
+  .ac-item:last-child{border-bottom:none}
+  .ac-item:hover,.ac-item.focused{background:var(--surface);color:var(--text)}
+  .ac-match{color:var(--accent)}
+  .field-ac-wrap{position:relative}
+  .alert{position:fixed;bottom:24px;right:24px;background:var(--surface);border:1px solid var(--accent);color:var(--text);padding:14px 20px;border-radius:10px;font-size:14px;z-index:999;display:none;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+  .alert.show{display:flex}
+  @media(max-width:900px){.builder-layout{grid-template-columns:1fr}.preview-card{position:static}.form-grid{grid-template-columns:1fr}}
+  @media(max-width:600px){header{padding:0 16px}.main{padding:16px}.modal-header,.modal-body,.modal-actions{padding-left:20px;padding-right:20px}}
 </style>
-
 </head>
 <body>
 
@@ -708,219 +150,192 @@ transition: background 0.1s;
     </div>
   </div>
   <nav>
-    <button class="nav-btn active" onclick="showTab('viewer')">📋 View Cards</button>
-    <button class="nav-btn" onclick="showTab('builder')">✏️ Build Card</button>
+    <button class="nav-btn active" id="navViewer">📋 View Cards</button>
+    <button class="nav-btn" id="navBuilder">✏️ Build Card</button>
   </nav>
   <div class="header-right">
     <span id="totalBadge" class="badge">0 cards</span>
   </div>
 </header>
 
-<!-- VIEWER TAB -->
-
 <div class="main active" id="viewerTab">
   <div class="stats-bar" id="statsBar"></div>
   <div class="search-bar-wrap">
-    <input class="search-input" id="searchInput" type="text" placeholder="Search by surgeon, procedure, specialty, instrument..." oninput="renderCards()">
-    <select class="filter-select" id="specialtyFilter" onchange="renderCards()">
-      <option value="">All Specialties</option>
-    </select>
-    <button class="btn btn-secondary btn-sm" onclick="showTab('builder')">+ New Card</button>
+    <input class="search-input" id="searchInput" type="text" placeholder="Search by surgeon, procedure, specialty, instrument...">
+    <select class="filter-select" id="specialtyFilter"><option value="">All Specialties</option></select>
+    <button class="btn btn-secondary btn-sm" id="newCardBtn">+ New Card</button>
   </div>
   <div class="cards-grid" id="cardsGrid"></div>
 </div>
 
-<!-- BUILDER TAB -->
-
 <div class="main" id="builderTab">
   <div class="edit-indicator" id="editIndicator">
     ✏️ Editing existing card — changes will overwrite the saved version.
-    <button class="btn btn-sm btn-secondary" onclick="cancelEdit()" style="margin-left:auto">Cancel Edit</button>
+    <button class="btn btn-sm btn-secondary" id="cancelEditBtn" style="margin-left:auto">Cancel Edit</button>
   </div>
   <div class="builder-layout">
     <div>
 
 ```
-  <!-- Surgeon & Procedure -->
   <div class="form-card" style="margin-bottom:20px">
     <div class="form-section">
-      <div class="form-section-title">🏥 Surgeon & Procedure</div>
+      <div class="form-section-title">🏥 Surgeon &amp; Procedure</div>
       <div class="form-grid">
         <div>
           <label>Surgeon Name *</label>
           <div class="field-ac-wrap">
-            <input type="text" id="f_surgeon" placeholder="Dr. Jane Smith" oninput="updatePreview(); acField(this,'surgeons')" onkeydown="acKeydown(event,this)" autocomplete="off">
+            <input type="text" id="f_surgeon" placeholder="Dr. Jane Smith" autocomplete="off">
             <div class="ac-dropdown" id="ac_f_surgeon"></div>
           </div>
         </div>
         <div>
           <label>Specialty *</label>
           <div class="field-ac-wrap">
-            <input type="text" id="f_specialty" placeholder="e.g. Orthopedics" oninput="updatePreview(); acField(this,'specialties')" onkeydown="acKeydown(event,this)" autocomplete="off">
+            <input type="text" id="f_specialty" placeholder="e.g. Orthopedics" autocomplete="off">
             <div class="ac-dropdown" id="ac_f_specialty"></div>
           </div>
         </div>
         <div class="form-full">
           <label>Procedure Name *</label>
           <div class="field-ac-wrap">
-            <input type="text" id="f_procedure" placeholder="e.g. Total Knee Arthroplasty" oninput="updatePreview(); acField(this,'procedures')" onkeydown="acKeydown(event,this)" autocomplete="off">
+            <input type="text" id="f_procedure" placeholder="e.g. Total Knee Arthroplasty" autocomplete="off">
             <div class="ac-dropdown" id="ac_f_procedure"></div>
           </div>
         </div>
         <div>
           <label>Laterality</label>
-          <select id="f_laterality" onchange="updatePreview()">
-            <option value="">N/A</option>
-            <option>Left</option>
-            <option>Right</option>
-            <option>Bilateral</option>
+          <select id="f_laterality">
+            <option value="">N/A</option><option>Left</option><option>Right</option><option>Bilateral</option>
           </select>
         </div>
         <div>
           <label>Estimated Duration</label>
-          <input type="text" id="f_duration" placeholder="e.g. 90 min" oninput="updatePreview()">
+          <input type="text" id="f_duration" placeholder="e.g. 90 min">
         </div>
         <div>
           <label>Anesthesia Type</label>
-          <select id="f_anesthesia" onchange="updatePreview()">
-            <option value="">Select...</option>
-            <option>General</option>
-            <option>Spinal</option>
-            <option>Epidural</option>
-            <option>Regional Block</option>
-            <option>MAC/Sedation</option>
-            <option>Local</option>
+          <select id="f_anesthesia">
+            <option value="">Select...</option><option>General</option><option>Spinal</option>
+            <option>Epidural</option><option>Regional Block</option><option>MAC/Sedation</option><option>Local</option>
           </select>
         </div>
         <div>
           <label>Patient Position</label>
-          <select id="f_position" onchange="updatePreview()">
-            <option value="">Select...</option>
-            <option>Supine</option>
-            <option>Prone</option>
-            <option>Lateral Decubitus</option>
-            <option>Lithotomy</option>
-            <option>Trendelenburg</option>
-            <option>Reverse Trendelenburg</option>
-            <option>Sitting/Beach Chair</option>
-            <option>Jackknife/Kraske</option>
+          <select id="f_position">
+            <option value="">Select...</option><option>Supine</option><option>Prone</option>
+            <option>Lateral Decubitus</option><option>Lithotomy</option><option>Trendelenburg</option>
+            <option>Reverse Trendelenburg</option><option>Sitting/Beach Chair</option><option>Jackknife/Kraske</option>
           </select>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Positioning & Setup -->
   <div class="form-card" style="margin-bottom:20px">
     <div class="form-section">
-      <div class="form-section-title">🛏️ Positioning & Room Setup</div>
+      <div class="form-section-title">🛏️ Positioning &amp; Room Setup</div>
       <div class="form-grid">
         <div class="form-full">
-          <label>Positioning Aids & Accessories</label>
+          <label>Positioning Aids &amp; Accessories</label>
           <div id="positioning_list"></div>
-          <button class="add-item-btn" onclick="addItem('positioning_list','Positioning item...')">+ Add positioning aid</button>
+          <button class="add-item-btn" data-list="positioning_list" data-ph="Positioning item...">+ Add positioning aid</button>
         </div>
         <div class="form-full">
           <label>Special Equipment Needed</label>
           <div id="equipment_list"></div>
-          <button class="add-item-btn" onclick="addItem('equipment_list','Equipment item...')">+ Add equipment</button>
+          <button class="add-item-btn" data-list="equipment_list" data-ph="Equipment item...">+ Add equipment</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Instruments -->
   <div class="form-card" style="margin-bottom:20px">
     <div class="form-section">
-      <div class="form-section-title">🔧 Instruments & Sets</div>
+      <div class="form-section-title">🔧 Instruments &amp; Sets</div>
       <div>
         <label>Instrument Trays / Sets</label>
         <div id="instruments_list"></div>
-        <button class="add-item-btn" onclick="addItem('instruments_list','e.g. Basic Laparotomy Set')">+ Add instrument set</button>
+        <button class="add-item-btn" data-list="instruments_list" data-ph="e.g. Basic Laparotomy Set">+ Add instrument set</button>
       </div>
       <div style="margin-top:14px">
         <label>Additional Instruments</label>
         <div id="extra_instruments_list"></div>
-        <button class="add-item-btn" onclick="addItem('extra_instruments_list','e.g. Weitlaner Retractor')">+ Add instrument</button>
+        <button class="add-item-btn" data-list="extra_instruments_list" data-ph="e.g. Weitlaner Retractor">+ Add instrument</button>
       </div>
     </div>
   </div>
 
-  <!-- Sutures & Supplies -->
   <div class="form-card" style="margin-bottom:20px">
     <div class="form-section">
-      <div class="form-section-title">🧵 Sutures & Supplies</div>
+      <div class="form-section-title">🧵 Sutures &amp; Supplies</div>
       <div class="form-grid">
         <div class="form-full">
           <label>Sutures (type, size, needle)</label>
           <div id="sutures_list"></div>
-          <button class="add-item-btn" onclick="addItem('sutures_list','e.g. 0-Vicryl, CT-1, x2')">+ Add suture</button>
+          <button class="add-item-btn" data-list="sutures_list" data-ph="e.g. 0-Vicryl, CT-1, x2">+ Add suture</button>
         </div>
         <div class="form-full">
-          <label>Skin Prep & Draping</label>
+          <label>Skin Prep &amp; Draping</label>
           <div id="prep_list"></div>
-          <button class="add-item-btn" onclick="addItem('prep_list','e.g. ChloraPrep x2')">+ Add prep/drape item</button>
+          <button class="add-item-btn" data-list="prep_list" data-ph="e.g. ChloraPrep x2">+ Add prep/drape item</button>
         </div>
         <div class="form-full">
-          <label>Sponges & Counts</label>
+          <label>Sponges &amp; Counts</label>
           <div id="sponges_list"></div>
-          <button class="add-item-btn" onclick="addItem('sponges_list','e.g. Laps x20, Ray-Tecs x20')">+ Add sponge/count item</button>
+          <button class="add-item-btn" data-list="sponges_list" data-ph="e.g. Laps x20, Ray-Tecs x20">+ Add sponge/count item</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Inventory & Implants -->
   <div class="form-card" style="margin-bottom:20px">
     <div class="form-section">
-      <div class="form-section-title">📦 Inventory, Implants & Special Orders</div>
+      <div class="form-section-title">📦 Inventory, Implants &amp; Special Orders</div>
       <div>
         <label>Implants / Prosthetics</label>
         <div id="implants_list"></div>
-        <button class="add-item-btn" onclick="addItem('implants_list','e.g. Zimmer Persona TKA System')">+ Add implant</button>
+        <button class="add-item-btn" data-list="implants_list" data-ph="e.g. Zimmer Persona TKA System">+ Add implant</button>
       </div>
       <div style="margin-top:14px">
         <label>Medications on Field</label>
         <div id="meds_list"></div>
-        <button class="add-item-btn" onclick="addItem('meds_list','e.g. Heparin 5000u/500mL NS')">+ Add medication</button>
+        <button class="add-item-btn" data-list="meds_list" data-ph="e.g. Heparin 5000u/500mL NS">+ Add medication</button>
       </div>
       <div style="margin-top:14px">
         <label>Special Supplies / One-time items</label>
         <div id="supplies_list"></div>
-        <button class="add-item-btn" onclick="addItem('supplies_list','e.g. Argon beam coagulator')">+ Add supply</button>
+        <button class="add-item-btn" data-list="supplies_list" data-ph="e.g. Argon beam coagulator">+ Add supply</button>
       </div>
     </div>
   </div>
 
-  <!-- Special Requests / Notes -->
   <div class="form-card">
     <div class="form-section">
-      <div class="form-section-title">⭐ Special Requests & Notes</div>
+      <div class="form-section-title">⭐ Special Requests &amp; Notes</div>
       <div class="form-grid">
         <div class="form-full">
-          <label>Surgeon Preferences & Quirks</label>
-          <textarea id="f_surgeon_notes" placeholder="e.g. Surgeon prefers music off during critical steps. Always have extra sponges opened before incision..." oninput="updatePreview()"></textarea>
+          <label>Surgeon Preferences &amp; Quirks</label>
+          <textarea id="f_surgeon_notes" placeholder="e.g. Surgeon prefers music off during critical steps..."></textarea>
         </div>
         <div class="form-full">
           <label>Allergies / Contraindications</label>
           <div id="allergies_list"></div>
-          <button class="add-item-btn" onclick="addItem('allergies_list','e.g. Latex allergy')">+ Add allergy/contraindication</button>
+          <button class="add-item-btn" data-list="allergies_list" data-ph="e.g. Latex allergy">+ Add allergy/contraindication</button>
         </div>
         <div class="form-full">
           <label>Additional Notes</label>
-          <textarea id="f_notes" placeholder="Any other important information for circulating or scrub nurses..." oninput="updatePreview()"></textarea>
+          <textarea id="f_notes" placeholder="Any other important information for circulating or scrub nurses..."></textarea>
         </div>
       </div>
     </div>
     <div class="form-actions">
-      <button class="btn btn-secondary" onclick="clearForm()">Clear Form</button>
-      <button class="btn btn-primary" onclick="saveCard()">💾 Save Preference Card</button>
+      <button class="btn btn-secondary" id="clearFormBtn">Clear Form</button>
+      <button class="btn btn-primary" id="saveCardBtn">💾 Save Preference Card</button>
     </div>
   </div>
 
 </div>
 
-<!-- Live Preview -->
 <div class="preview-card">
   <div class="preview-header">
     <div class="preview-title-text">Live Preview</div>
@@ -951,685 +366,528 @@ transition: background 0.1s;
   </div>
 </div>
 
-<!-- FULL CARD MODAL -->
-
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+<div class="modal-overlay" id="modalOverlay">
   <div class="modal" id="modal">
     <div class="modal-header">
       <div>
         <div class="modal-title" id="m_title"></div>
         <div class="modal-meta" id="m_meta"></div>
       </div>
-      <button class="close-btn" onclick="closeModalDirect()">✕</button>
+      <button class="close-btn" id="closeModalBtn">✕</button>
     </div>
     <div class="modal-body" id="m_body"></div>
     <div class="modal-actions" id="m_actions"></div>
   </div>
 </div>
 
-<div class="alert" id="alertBox">
-  <span id="alertIcon">✅</span>
-  <span id="alertMsg"></span>
-</div>
+<div class="alert" id="alertBox"><span id="alertMsg"></span></div>
 
 <script>
-// ===== DATA STORE =====
-let cards = JSON.parse(localStorage.getItem('or_pref_cards') || '[]');
-let editingId = null;
+(function(){
+'use strict';
 
-function save() {
-  localStorage.setItem('or_pref_cards', JSON.stringify(cards));
-  buildDictionary();
-  updateBadge();
-  updateSpecialtyFilter();
-  updateStats();
-}
+var cards=[];
+try{cards=JSON.parse(localStorage.getItem('or_pref_cards')||'[]');}catch(e){cards=[];}
+var editingId=null;
 
-function updateBadge() {
-  document.getElementById('totalBadge').textContent = cards.length + ' card' + (cards.length !== 1 ? 's' : '');
-}
-
-// ===== TABS =====
-function showTab(tab) {
-  document.querySelectorAll('.main').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-  document.getElementById(tab + 'Tab').classList.add('active');
-  document.querySelectorAll('.nav-btn')[tab === 'viewer' ? 0 : 1].classList.add('active');
-  if (tab === 'viewer') { renderCards(); }
-}
-
-// ===== AUTOCOMPLETE DICTIONARY =====
-// Maps category keys -> Set of known values
-const acCategories = {
-  surgeons: new Set(),
-  specialties: new Set(),
-  procedures: new Set(),
-  positioning: new Set(),
-  equipment: new Set(),
-  instruments: new Set(),
-  extra_instruments: new Set(),
-  sutures: new Set(),
-  prep: new Set(),
-  sponges: new Set(),
-  implants: new Set(),
-  meds: new Set(),
-  supplies: new Set(),
-  allergies: new Set(),
+var listToCategory={
+  positioning_list:'positioning',equipment_list:'equipment',
+  instruments_list:'instruments',extra_instruments_list:'extra_instruments',
+  sutures_list:'sutures',prep_list:'prep',sponges_list:'sponges',
+  implants_list:'implants',meds_list:'meds',supplies_list:'supplies',allergies_list:'allergies'
 };
+var allListKeys=['positioning','equipment','instruments','extra_instruments','sutures','prep','sponges','implants','meds','supplies','allergies'];
 
-// Map list IDs -> category key
-const listToCategory = {
-  positioning_list: 'positioning',
-  equipment_list: 'equipment',
-  instruments_list: 'instruments',
-  extra_instruments_list: 'extra_instruments',
-  sutures_list: 'sutures',
-  prep_list: 'prep',
-  sponges_list: 'sponges',
-  implants_list: 'implants',
-  meds_list: 'meds',
-  supplies_list: 'supplies',
-  allergies_list: 'allergies',
-};
+// AC dictionary
+var acCats={};
+['surgeons','specialties','procedures','positioning','equipment','instruments','extra_instruments','sutures','prep','sponges','implants','meds','supplies','allergies'].forEach(function(k){acCats[k]=[];});
 
-function buildDictionary() {
-  Object.keys(acCategories).forEach(k => acCategories[k].clear());
-  cards.forEach(c => {
-    if (c.surgeon) acCategories.surgeons.add(c.surgeon);
-    if (c.specialty) acCategories.specialties.add(c.specialty);
-    if (c.procedure) acCategories.procedures.add(c.procedure);
-    ['positioning','equipment','instruments','extra_instruments','sutures','prep','sponges','implants','meds','supplies','allergies'].forEach(k => {
-      (c[k]||[]).forEach(v => {
-        const name = typeof v === 'string' ? v : v.name;
-        if (name) acCategories[k].add(name);
-      });
+function buildDictionary(){
+  var sets={};
+  Object.keys(acCats).forEach(function(k){sets[k]=new Set();});
+  cards.forEach(function(c){
+    if(c.surgeon)sets.surgeons.add(c.surgeon);
+    if(c.specialty)sets.specialties.add(c.specialty);
+    if(c.procedure)sets.procedures.add(c.procedure);
+    allListKeys.forEach(function(k){
+      (c[k]||[]).forEach(function(v){var n=typeof v==='string'?v:v.name;if(n)sets[k].add(n);});
     });
   });
+  Object.keys(acCats).forEach(function(k){acCats[k]=[...sets[k]];});
 }
 
-function getSuggestions(category, query) {
-  if (!query || query.length < 1) return [];
-  const q = query.toLowerCase();
-  const all = [...acCategories[category]];
-  // Score: starts-with gets priority, then contains
-  return all
-    .map(v => ({ v, score: v.toLowerCase().startsWith(q) ? 2 : v.toLowerCase().includes(q) ? 1 : 0 }))
-    .filter(x => x.score > 0)
-    .sort((a,b) => b.score - a.score || a.v.localeCompare(b.v))
-    .slice(0, 8)
-    .map(x => x.v);
+function getSuggestions(cat,q){
+  if(!q)return[];
+  var ql=q.toLowerCase();
+  return acCats[cat]
+    .map(function(v){return{v:v,s:v.toLowerCase().startsWith(ql)?2:v.toLowerCase().includes(ql)?1:0};})
+    .filter(function(x){return x.s>0;})
+    .sort(function(a,b){return b.s-a.s||a.v.localeCompare(b.v);})
+    .slice(0,8).map(function(x){return x.v;});
 }
 
-function highlightMatch(text, query) {
-  if (!query) return text;
-  const idx = text.toLowerCase().indexOf(query.toLowerCase());
-  if (idx === -1) return text;
-  return text.slice(0,idx) + `<span class="ac-match">${text.slice(idx, idx+query.length)}</span>` + text.slice(idx+query.length);
+function highlight(text,q){
+  if(!q)return text;
+  var i=text.toLowerCase().indexOf(q.toLowerCase());
+  if(i===-1)return text;
+  return text.slice(0,i)+'<span class="ac-match">'+text.slice(i,i+q.length)+'</span>'+text.slice(i+q.length);
 }
 
-// For single text fields (surgeon, specialty, procedure)
-function acField(input, category) {
-  const dropId = 'ac_' + input.id;
-  const drop = document.getElementById(dropId);
-  if (!drop) return;
-  const suggestions = getSuggestions(category, input.value);
-  if (!suggestions.length || input.value === suggestions[0]) { drop.classList.remove('open'); return; }
-  drop.innerHTML = suggestions.map((s,i) => `<div class="ac-item" data-val="${s.replace(/"/g,'&quot;')}" onmousedown="acSelect(event,'${input.id}','${dropId}')">${highlightMatch(s, input.value)}</div>`).join('');
+function showDrop(drop,suggestions,query,onSelect){
+  if(!suggestions.length){drop.classList.remove('open');return;}
+  while(drop.firstChild)drop.removeChild(drop.firstChild);
+  suggestions.forEach(function(s){
+    var d=document.createElement('div');
+    d.className='ac-item';d.dataset.val=s;d.innerHTML=highlight(s,query);
+    d.addEventListener('mousedown',function(e){e.preventDefault();onSelect(s);drop.classList.remove('open');});
+    drop.appendChild(d);
+  });
   drop.classList.add('open');
 }
 
-function acSelect(e, inputId, dropId) {
-  e.preventDefault();
-  const val = e.currentTarget.dataset.val;
-  document.getElementById(inputId).value = val;
-  document.getElementById(dropId).classList.remove('open');
+function keyNav(e,drop,onSelect){
+  if(!drop.classList.contains('open'))return;
+  var items=drop.querySelectorAll('.ac-item');
+  var focused=drop.querySelector('.ac-item.focused');
+  if(e.key==='ArrowDown'){
+    e.preventDefault();
+    if(!focused){if(items[0])items[0].classList.add('focused');}
+    else{focused.classList.remove('focused');(focused.nextElementSibling||items[0]).classList.add('focused');}
+  }else if(e.key==='ArrowUp'){
+    e.preventDefault();
+    if(!focused){if(items[items.length-1])items[items.length-1].classList.add('focused');}
+    else{focused.classList.remove('focused');(focused.previousElementSibling||items[items.length-1]).classList.add('focused');}
+  }else if((e.key==='Enter'||e.key==='Tab')&&focused){
+    e.preventDefault();onSelect(focused.dataset.val);drop.classList.remove('open');
+  }else if(e.key==='Escape'){drop.classList.remove('open');}
+}
+
+function attachFieldAC(inputId,cat){
+  var inp=document.getElementById(inputId);
+  var drop=document.getElementById('ac_'+inputId);
+  if(!inp||!drop)return;
+  inp.addEventListener('input',function(){
+    updatePreview();
+    showDrop(drop,getSuggestions(cat,inp.value),inp.value,function(v){inp.value=v;updatePreview();});
+  });
+  inp.addEventListener('keydown',function(e){keyNav(e,drop,function(v){inp.value=v;updatePreview();});});
+}
+
+function nm(v){return typeof v==='string'?v:v.name;}
+
+function addItem(listId,placeholder,value,instructions){
+  value=value||'';instructions=instructions||'';
+  var cat=listToCategory[listId];
+  var list=document.getElementById(listId);
+  var block=document.createElement('div');
+  block.className='item-block';
+
+  var acWrap=document.createElement('div');
+  acWrap.className='ac-wrap';
+
+  var nameInp=document.createElement('input');
+  nameInp.type='text';nameInp.placeholder=placeholder;nameInp.value=value;nameInp.autocomplete='off';
+  acWrap.appendChild(nameInp);
+
+  var acDrop=null;
+  if(cat){
+    acDrop=document.createElement('div');acDrop.className='ac-dropdown';acWrap.appendChild(acDrop);
+    nameInp.addEventListener('input',function(){
+      updatePreview();
+      showDrop(acDrop,getSuggestions(cat,nameInp.value),nameInp.value,function(v){nameInp.value=v;updatePreview();});
+    });
+    nameInp.addEventListener('keydown',function(e){keyNav(e,acDrop,function(v){nameInp.value=v;updatePreview();});});
+  }else{
+    nameInp.addEventListener('input',updatePreview);
+  }
+
+  var instrToggle=document.createElement('button');
+  instrToggle.className='instr-toggle'+(instructions?' has-notes':'');
+  instrToggle.type='button';instrToggle.title='Add instructions/settings';instrToggle.textContent='⚙';
+
+  var removeBtn=document.createElement('button');
+  removeBtn.className='remove-btn';removeBtn.type='button';removeBtn.textContent='×';
+  removeBtn.addEventListener('click',function(){block.remove();updatePreview();});
+
+  var row=document.createElement('div');row.className='multi-input-row';
+  row.appendChild(acWrap);row.appendChild(instrToggle);row.appendChild(removeBtn);
+
+  var instrRow=document.createElement('div');instrRow.className='instr-row'+(instructions?' open':'');
+  var instrInp=document.createElement('input');
+  instrInp.type='text';instrInp.placeholder='Instructions / settings / notes for this item...';instrInp.value=instructions;
+  instrInp.addEventListener('input',function(){instrToggle.classList.toggle('has-notes',instrInp.value.trim().length>0);});
+  instrRow.appendChild(instrInp);
+
+  instrToggle.addEventListener('click',function(){
+    instrRow.classList.toggle('open');
+    if(instrRow.classList.contains('open'))instrInp.focus();
+    else if(!instrInp.value.trim())instrToggle.classList.remove('has-notes');
+  });
+
+  block.appendChild(row);block.appendChild(instrRow);list.appendChild(block);
   updatePreview();
 }
 
-function acKeydown(e, input) {
-  const dropId = 'ac_' + input.id;
-  const drop = document.getElementById(dropId);
-  if (!drop || !drop.classList.contains('open')) return;
-  const items = drop.querySelectorAll('.ac-item');
-  let focused = drop.querySelector('.ac-item.focused');
-  if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    if (!focused) { items[0]?.classList.add('focused'); }
-    else { focused.classList.remove('focused'); (focused.nextElementSibling||items[0]).classList.add('focused'); }
-  } else if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    if (!focused) { items[items.length-1]?.classList.add('focused'); }
-    else { focused.classList.remove('focused'); (focused.previousElementSibling||items[items.length-1]).classList.add('focused'); }
-  } else if (e.key === 'Enter' || e.key === 'Tab') {
-    if (focused) { e.preventDefault(); input.value = focused.dataset.val; drop.classList.remove('open'); updatePreview(); }
-  } else if (e.key === 'Escape') {
-    drop.classList.remove('open');
-  }
-}
-
-// For list row inputs (instruments, sutures etc)
-function acListField(input, category) {
-  let drop = input.parentElement.querySelector('.ac-dropdown');
-  if (!drop) return;
-  const suggestions = getSuggestions(category, input.value);
-  if (!suggestions.length || input.value === suggestions[0]) { drop.classList.remove('open'); return; }
-  drop.innerHTML = suggestions.map(s => `<div class="ac-item" data-val="${s.replace(/"/g,'&quot;')}" onmousedown="acListSelect(event,this)">${highlightMatch(s, input.value)}</div>`).join('');
-  drop.classList.add('open');
-}
-
-function acListSelect(e, item) {
-  e.preventDefault();
-  const input = item.closest('.ac-wrap').querySelector('input');
-  input.value = item.dataset.val;
-  item.closest('.ac-dropdown').classList.remove('open');
-  updatePreview();
-}
-
-function acListKeydown(e, input) {
-  const drop = input.parentElement.querySelector('.ac-dropdown');
-  if (!drop || !drop.classList.contains('open')) return;
-  const items = drop.querySelectorAll('.ac-item');
-  let focused = drop.querySelector('.ac-item.focused');
-  if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    if (!focused) items[0]?.classList.add('focused');
-    else { focused.classList.remove('focused'); (focused.nextElementSibling||items[0]).classList.add('focused'); }
-  } else if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    if (!focused) items[items.length-1]?.classList.add('focused');
-    else { focused.classList.remove('focused'); (focused.previousElementSibling||items[items.length-1]).classList.add('focused'); }
-  } else if (e.key === 'Enter' || e.key === 'Tab') {
-    if (focused) { e.preventDefault(); input.value = focused.dataset.val; drop.classList.remove('open'); updatePreview(); }
-  } else if (e.key === 'Escape') {
-    drop.classList.remove('open');
-  }
-}
-
-// ===== DYNAMIC LIST INPUTS =====
-function addItem(listId, placeholder, value = '', instructions = '') {
-  const category = listToCategory[listId];
-  const list = document.getElementById(listId);
-  const block = document.createElement('div');
-  block.className = 'item-block';
-
-  const hasInstr = instructions.length > 0;
-  block.innerHTML = `
-    <div class="multi-input-row">
-      <div class="ac-wrap" style="position:relative;flex:1">
-        <input type="text" placeholder="${placeholder}" value="${value.replace(/"/g,'&quot;')}" autocomplete="off"
-          oninput="updatePreview(); ${category ? `acListField(this,'${category}')` : ''}"
-          onkeydown="${category ? `acListKeydown(event,this)` : ''}">
-        ${category ? `<div class="ac-dropdown"></div>` : ''}
-      </div>
-      <button class="instr-toggle${hasInstr ? ' has-notes' : ''}" title="Add instructions/settings" onclick="toggleInstr(this)">⚙</button>
-      <button class="remove-btn" onclick="this.closest('.item-block').remove(); updatePreview()">×</button>
-    </div>
-    <div class="instr-row${hasInstr ? ' open' : ''}">
-      <input type="text" placeholder="Instructions / settings / notes for this item..." value="${instructions.replace(/"/g,'&quot;')}" oninput="syncInstrToggle(this)">
-    </div>`;
-  list.appendChild(block);
-  updatePreview();
-}
-
-function toggleInstr(btn) {
-  const row = btn.closest('.item-block').querySelector('.instr-row');
-  row.classList.toggle('open');
-  if (row.classList.contains('open')) {
-    row.querySelector('input').focus();
-  } else {
-    // Clear if empty on close
-    const inp = row.querySelector('input');
-    if (!inp.value.trim()) btn.classList.remove('has-notes');
-  }
-}
-
-function syncInstrToggle(instrInput) {
-  const btn = instrInput.closest('.item-block').querySelector('.instr-toggle');
-  btn.classList.toggle('has-notes', instrInput.value.trim().length > 0);
-}
-
-function getListValues(listId) {
-  return Array.from(document.querySelectorAll(`#${listId} .item-block`)).map(block => {
-    const name = block.querySelector('.ac-wrap input, .multi-input-row input')?.value.trim() || '';
-    const instr = block.querySelector('.instr-row input')?.value.trim() || '';
-    if (!name) return null;
-    return instr ? { name, instructions: instr } : { name };
+function getListValues(listId){
+  return Array.prototype.slice.call(document.querySelectorAll('#'+listId+' .item-block')).map(function(block){
+    var nameEl=block.querySelector('.ac-wrap input');
+    var instrEl=block.querySelector('.instr-row input');
+    var name=nameEl?nameEl.value.trim():'';
+    var instr=instrEl?instrEl.value.trim():'';
+    if(!name)return null;
+    return instr?{name:name,instructions:instr}:{name:name};
   }).filter(Boolean);
 }
 
-// Helper: get just names for preview/autocomplete purposes
-function getListNames(listId) {
-  return getListValues(listId).map(v => typeof v === 'string' ? v : v.name);
+function getListNames(listId){return getListValues(listId).map(nm);}
+function clearList(id){document.getElementById(id).innerHTML='';}
+
+function persist(){
+  try{localStorage.setItem('or_pref_cards',JSON.stringify(cards));}catch(e){}
+  buildDictionary();updateBadge();updateSpecialtyFilter();updateStats();
 }
 
-function clearList(listId) {
-  document.getElementById(listId).innerHTML = '';
+function updateBadge(){document.getElementById('totalBadge').textContent=cards.length+' card'+(cards.length!==1?'s':'');}
+
+function showTab(tab){
+  document.querySelectorAll('.main').forEach(function(el){el.classList.remove('active');});
+  document.getElementById('navViewer').classList.toggle('active',tab==='viewer');
+  document.getElementById('navBuilder').classList.toggle('active',tab==='builder');
+  document.getElementById(tab+'Tab').classList.add('active');
+  if(tab==='viewer')renderCards();
 }
 
-// ===== PREVIEW =====
-function updatePreview() {
-  document.getElementById('prev_procedure').textContent = document.getElementById('f_procedure').value || 'Procedure Name';
-  document.getElementById('prev_surgeon').textContent = document.getElementById('f_surgeon').value || 'Dr. Surgeon';
-
-  const details = [];
-  const specialty = document.getElementById('f_specialty').value;
-  const laterality = document.getElementById('f_laterality').value;
-  const duration = document.getElementById('f_duration').value;
-  const anesthesia = document.getElementById('f_anesthesia').value;
-  const position = document.getElementById('f_position').value;
-  if (specialty) details.push(specialty);
-  if (laterality) details.push(laterality);
-  if (duration) details.push(duration);
-  if (anesthesia) details.push(anesthesia);
-  if (position) details.push(position);
-
-  document.getElementById('prev_details').innerHTML = details.map(d => `<span class="preview-tag">${d}</span>`).join('');
-
-  const instr = [...getListNames('instruments_list'), ...getListNames('extra_instruments_list')];
-  document.getElementById('prev_instruments').innerHTML = instr.map(d => `<span class="preview-tag">${d}</span>`).join('') || '<span style="color:var(--text-dim);font-size:12px">None added</span>';
-
-  const sut = getListNames('sutures_list');
-  document.getElementById('prev_sutures').innerHTML = sut.map(d => `<span class="preview-tag">${d}</span>`).join('') || '<span style="color:var(--text-dim);font-size:12px">None added</span>';
-
-  const notes = document.getElementById('f_surgeon_notes').value || document.getElementById('f_notes').value;
-  document.getElementById('prev_notes').textContent = notes || '—';
+function updatePreview(){
+  document.getElementById('prev_procedure').textContent=document.getElementById('f_procedure').value||'Procedure Name';
+  document.getElementById('prev_surgeon').textContent=document.getElementById('f_surgeon').value||'Dr. Surgeon';
+  var details=[];
+  ['f_specialty','f_laterality','f_duration','f_anesthesia','f_position'].forEach(function(id){
+    var v=document.getElementById(id).value;if(v)details.push(v);
+  });
+  document.getElementById('prev_details').innerHTML=details.map(function(d){return '<span class="preview-tag">'+d+'</span>';}).join('');
+  var instr=getListNames('instruments_list').concat(getListNames('extra_instruments_list'));
+  document.getElementById('prev_instruments').innerHTML=instr.length?instr.map(function(d){return '<span class="preview-tag">'+d+'</span>';}).join(''):'<span style="color:var(--text-dim);font-size:12px">None added</span>';
+  var sut=getListNames('sutures_list');
+  document.getElementById('prev_sutures').innerHTML=sut.length?sut.map(function(d){return '<span class="preview-tag">'+d+'</span>';}).join(''):'<span style="color:var(--text-dim);font-size:12px">None added</span>';
+  document.getElementById('prev_notes').textContent=document.getElementById('f_surgeon_notes').value||document.getElementById('f_notes').value||'—';
 }
 
-// ===== SAVE / EDIT / DELETE =====
-function saveCard() {
-  const surgeon = document.getElementById('f_surgeon').value.trim();
-  const procedure = document.getElementById('f_procedure').value.trim();
-  const specialty = document.getElementById('f_specialty').value.trim();
-
-  if (!surgeon || !procedure || !specialty) {
-    showAlert('⚠️ Please fill in Surgeon Name, Procedure, and Specialty.', true);
-    return;
-  }
-
-  const card = {
-    id: editingId || Date.now().toString(),
-    surgeon, procedure, specialty,
-    laterality: document.getElementById('f_laterality').value,
-    duration: document.getElementById('f_duration').value.trim(),
-    anesthesia: document.getElementById('f_anesthesia').value,
-    position: document.getElementById('f_position').value,
-    positioning: getListValues('positioning_list'),
-    equipment: getListValues('equipment_list'),
-    instruments: getListValues('instruments_list'),
-    extra_instruments: getListValues('extra_instruments_list'),
-    sutures: getListValues('sutures_list'),
-    prep: getListValues('prep_list'),
-    sponges: getListValues('sponges_list'),
-    implants: getListValues('implants_list'),
-    meds: getListValues('meds_list'),
-    supplies: getListValues('supplies_list'),
-    allergies: getListValues('allergies_list'),
-    surgeon_notes: document.getElementById('f_surgeon_notes').value.trim(),
-    notes: document.getElementById('f_notes').value.trim(),
-    updated: new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' })
+function saveCard(){
+  var surgeon=document.getElementById('f_surgeon').value.trim();
+  var procedure=document.getElementById('f_procedure').value.trim();
+  var specialty=document.getElementById('f_specialty').value.trim();
+  if(!surgeon||!procedure||!specialty){showAlert('Please fill in Surgeon Name, Procedure, and Specialty.',true);return;}
+  var card={
+    id:editingId||Date.now().toString(),
+    surgeon:surgeon,procedure:procedure,specialty:specialty,
+    laterality:document.getElementById('f_laterality').value,
+    duration:document.getElementById('f_duration').value.trim(),
+    anesthesia:document.getElementById('f_anesthesia').value,
+    position:document.getElementById('f_position').value,
+    positioning:getListValues('positioning_list'),equipment:getListValues('equipment_list'),
+    instruments:getListValues('instruments_list'),extra_instruments:getListValues('extra_instruments_list'),
+    sutures:getListValues('sutures_list'),prep:getListValues('prep_list'),
+    sponges:getListValues('sponges_list'),implants:getListValues('implants_list'),
+    meds:getListValues('meds_list'),supplies:getListValues('supplies_list'),
+    allergies:getListValues('allergies_list'),
+    surgeon_notes:document.getElementById('f_surgeon_notes').value.trim(),
+    notes:document.getElementById('f_notes').value.trim(),
+    updated:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})
   };
-
-  if (editingId) {
-    const idx = cards.findIndex(c => c.id === editingId);
-    if (idx !== -1) cards[idx] = card;
-    showAlert('✅ Card updated successfully!');
-  } else {
-    cards.unshift(card);
-    showAlert('✅ Preference card saved!');
-  }
-
-  save();
-  clearForm();
-  showTab('viewer');
+  if(editingId){
+    var idx=cards.findIndex(function(c){return c.id===editingId;});
+    if(idx!==-1)cards[idx]=card;
+    showAlert('Card updated successfully!');
+  }else{cards.unshift(card);showAlert('Preference card saved!');}
+  persist();clearForm();showTab('viewer');
 }
 
-function editCard(id) {
-  const card = cards.find(c => c.id === id);
-  if (!card) return;
-  editingId = id;
-  closeModalDirect();
-  showTab('builder');
+function clearForm(){
+  editingId=null;
+  document.getElementById('editIndicator').classList.remove('show');
+  ['f_surgeon','f_procedure','f_specialty','f_duration','f_surgeon_notes','f_notes'].forEach(function(id){document.getElementById(id).value='';});
+  ['f_laterality','f_anesthesia','f_position'].forEach(function(id){document.getElementById(id).selectedIndex=0;});
+  Object.keys(listToCategory).forEach(clearList);
+  updatePreview();
+}
+
+function editCard(id){
+  var card=cards.find(function(c){return c.id===id;});
+  if(!card)return;
+  editingId=id;closeModal();showTab('builder');
   document.getElementById('editIndicator').classList.add('show');
-
-  document.getElementById('f_surgeon').value = card.surgeon || '';
-  document.getElementById('f_procedure').value = card.procedure || '';
-  document.getElementById('f_specialty').value = card.specialty || '';
-  document.getElementById('f_laterality').value = card.laterality || '';
-  document.getElementById('f_duration').value = card.duration || '';
-  document.getElementById('f_anesthesia').value = card.anesthesia || '';
-  document.getElementById('f_position').value = card.position || '';
-  document.getElementById('f_surgeon_notes').value = card.surgeon_notes || '';
-  document.getElementById('f_notes').value = card.notes || '';
-
-  const lists = [['positioning_list','Positioning item...','positioning'],['equipment_list','Equipment item...','equipment'],
+  ['surgeon','procedure','specialty','duration','surgeon_notes','notes'].forEach(function(k){
+    document.getElementById('f_'+k).value=card[k]||'';
+  });
+  ['laterality','anesthesia','position'].forEach(function(k){document.getElementById('f_'+k).value=card[k]||'';});
+  var defs=[
+    ['positioning_list','Positioning item...','positioning'],['equipment_list','Equipment item...','equipment'],
     ['instruments_list','Instrument set...','instruments'],['extra_instruments_list','Instrument...','extra_instruments'],
-    ['sutures_list','Suture...','sutures'],['prep_list','Prep/drape...','prep'],['sponges_list','Sponge/count...','sponges'],
-    ['implants_list','Implant...','implants'],['meds_list','Medication...','meds'],['supplies_list','Supply...','supplies'],
-    ['allergies_list','Allergy...','allergies']];
-
-  lists.forEach(([listId, ph, key]) => {
-    clearList(listId);
-    (card[key] || []).forEach(v => {
-      const name = typeof v === 'string' ? v : v.name;
-      const instr = typeof v === 'object' ? (v.instructions || '') : '';
-      addItem(listId, ph, name, instr);
+    ['sutures_list','Suture...','sutures'],['prep_list','Prep/drape...','prep'],
+    ['sponges_list','Sponge/count...','sponges'],['implants_list','Implant...','implants'],
+    ['meds_list','Medication...','meds'],['supplies_list','Supply...','supplies'],['allergies_list','Allergy...','allergies']
+  ];
+  defs.forEach(function(d){
+    clearList(d[0]);
+    (card[d[2]]||[]).forEach(function(v){
+      addItem(d[0],d[1],typeof v==='string'?v:v.name,typeof v==='object'?(v.instructions||''):'');
     });
   });
-
-  updatePreview();
-  window.scrollTo(0, 0);
+  updatePreview();window.scrollTo(0,0);
 }
 
-function cancelEdit() {
-  editingId = null;
-  document.getElementById('editIndicator').classList.remove('show');
-  clearForm();
+function deleteCard(id){
+  if(!confirm('Delete this preference card? This cannot be undone.'))return;
+  cards=cards.filter(function(c){return c.id!==id;});
+  persist();closeModal();renderCards();showAlert('Card deleted.');
 }
 
-function deleteCard(id) {
-  if (!confirm('Delete this preference card? This cannot be undone.')) return;
-  cards = cards.filter(c => c.id !== id);
-  save();
-  closeModalDirect();
-  renderCards();
-  showAlert('🗑️ Card deleted.');
-}
-
-function clearForm() {
-  editingId = null;
-  document.getElementById('editIndicator').classList.remove('show');
-  ['f_surgeon','f_procedure','f_specialty','f_duration','f_surgeon_notes','f_notes'].forEach(id => document.getElementById(id).value = '');
-  ['f_laterality','f_anesthesia','f_position'].forEach(id => document.getElementById(id).selectedIndex = 0);
-  ['positioning_list','equipment_list','instruments_list','extra_instruments_list','sutures_list',
-   'prep_list','sponges_list','implants_list','meds_list','supplies_list','allergies_list'].forEach(id => clearList(id));
-  updatePreview();
-}
-
-// ===== RENDER CARDS =====
-function renderCards() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const sp = document.getElementById('specialtyFilter').value;
-
-  let filtered = cards.filter(c => {
-    const names = arr => (arr||[]).map(v => typeof v === 'string' ? v : v.name);
-    const matchQ = !q || [c.surgeon, c.procedure, c.specialty, c.anesthesia, c.position,
-      ...names(c.instruments), ...names(c.extra_instruments), ...names(c.sutures),
-      ...names(c.implants), ...names(c.supplies)].join(' ').toLowerCase().includes(q);
-    const matchSp = !sp || c.specialty === sp;
-    return matchQ && matchSp;
+function renderCards(){
+  var q=document.getElementById('searchInput').value.toLowerCase();
+  var sp=document.getElementById('specialtyFilter').value;
+  var filtered=cards.filter(function(c){
+    var allNames=function(arr){return(arr||[]).map(nm);};
+    var txt=[c.surgeon,c.procedure,c.specialty,c.anesthesia,c.position]
+      .concat(allNames(c.instruments)).concat(allNames(c.extra_instruments))
+      .concat(allNames(c.sutures)).concat(allNames(c.implants)).concat(allNames(c.supplies))
+      .join(' ').toLowerCase();
+    return(!q||txt.includes(q))&&(!sp||c.specialty===sp);
   });
-
-  const grid = document.getElementById('cardsGrid');
-
-  if (cards.length === 0) {
-    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
-      <div class="big">🔬</div>
-      <h3>No preference cards yet</h3>
-      <p>Click "Build Card" in the top navigation to create your first OR preference card.</p>
-    </div>`;
+  var grid=document.getElementById('cardsGrid');
+  if(cards.length===0){
+    grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="big">🔬</div><h3>No preference cards yet</h3><p>Click "Build Card" to create your first OR preference card.</p></div>';
     return;
   }
-
-  if (filtered.length === 0) {
-    grid.innerHTML = `<div class="no-results" style="grid-column:1/-1">No cards match your search.</div>`;
-    return;
-  }
-
-  const nm = v => typeof v === 'string' ? v : v.name;
-
-  grid.innerHTML = filtered.map(c => `
-    <div class="card" onclick="openModal('${c.id}')">
-      <div class="card-header">
-        <div>
-          <div class="card-title">${c.procedure}</div>
-          <div class="card-surgeon">${c.surgeon}</div>
-        </div>
-        <div style="text-align:right">
-          <div class="card-specialty">${c.specialty}</div>
-          ${c.laterality ? `<div class="card-specialty" style="margin-top:4px">${c.laterality}</div>` : ''}
-        </div>
-      </div>
-      <div class="card-body">
-        ${c.anesthesia || c.position || c.duration ? `
-        <div class="card-label">Setup</div>
-        <div class="card-row" style="margin-bottom:10px">
-          ${c.anesthesia ? `<span class="tag blue">${c.anesthesia}</span>` : ''}
-          ${c.position ? `<span class="tag">${c.position}</span>` : ''}
-          ${c.duration ? `<span class="tag warn">⏱ ${c.duration}</span>` : ''}
-        </div>` : ''}
-        ${(c.instruments||[]).length || (c.extra_instruments||[]).length ? `
-        <div class="card-label">Instruments</div>
-        <div class="card-row">
-          ${[...(c.instruments||[]), ...(c.extra_instruments||[])].slice(0,4).map(i => `<span class="tag green">${nm(i)}</span>`).join('')}
-          ${((c.instruments||[]).length + (c.extra_instruments||[]).length) > 4 ? `<span class="tag">+${(c.instruments||[]).length+(c.extra_instruments||[]).length-4} more</span>` : ''}
-        </div>` : ''}
-        ${(c.sutures||[]).length ? `
-        <div class="card-label" style="margin-top:6px">Sutures</div>
-        <div class="card-row">
-          ${(c.sutures||[]).slice(0,3).map(s => `<span class="tag">${nm(s)}</span>`).join('')}
-          ${(c.sutures||[]).length > 3 ? `<span class="tag">+${c.sutures.length-3}</span>` : ''}
-        </div>` : ''}
-        ${(c.allergies||[]).length ? `<div class="card-row" style="margin-top:6px">${(c.allergies||[]).map(a=>`<span class="tag red">⚠ ${nm(a)}</span>`).join('')}</div>` : ''}
-      </div>
-      <div class="card-footer">
-        <span class="card-date">Updated ${c.updated}</span>
-        <span class="tag" style="font-size:11px">${[(c.instruments||[]).length+(c.extra_instruments||[]).length,(c.sutures||[]).length].filter(Boolean).join(' instr, ')} items</span>
-      </div>
-    </div>
-  `).join('');
+  if(filtered.length===0){grid.innerHTML='<div class="no-results" style="grid-column:1/-1">No cards match your search.</div>';return;}
+  grid.innerHTML=filtered.map(function(c){
+    var instrList=(c.instruments||[]).concat(c.extra_instruments||[]);
+    return '<div class="card" data-id="'+c.id+'">'+
+      '<div class="card-header">'+
+        '<div><div class="card-title">'+c.procedure+'</div><div class="card-surgeon">'+c.surgeon+'</div></div>'+
+        '<div style="text-align:right"><div class="card-specialty">'+c.specialty+'</div>'+(c.laterality?'<div class="card-specialty" style="margin-top:4px">'+c.laterality+'</div>':'')+'</div>'+
+      '</div>'+
+      '<div class="card-body">'+
+        (c.anesthesia||c.position||c.duration?'<div class="card-label">Setup</div><div class="card-row" style="margin-bottom:10px">'+
+          (c.anesthesia?'<span class="tag blue">'+c.anesthesia+'</span>':'')+
+          (c.position?'<span class="tag">'+c.position+'</span>':'')+
+          (c.duration?'<span class="tag warn">⏱ '+c.duration+'</span>':'')+
+        '</div>':'')+
+        (instrList.length?'<div class="card-label">Instruments</div><div class="card-row">'+
+          instrList.slice(0,4).map(function(i){return '<span class="tag green">'+nm(i)+'</span>';}).join('')+
+          (instrList.length>4?'<span class="tag">+'+(instrList.length-4)+' more</span>':'')+
+        '</div>':'')+
+        ((c.sutures||[]).length?'<div class="card-label" style="margin-top:6px">Sutures</div><div class="card-row">'+
+          (c.sutures||[]).slice(0,3).map(function(s){return '<span class="tag">'+nm(s)+'</span>';}).join('')+
+          ((c.sutures||[]).length>3?'<span class="tag">+'+(c.sutures.length-3)+'</span>':'')+
+        '</div>':'')+
+        ((c.allergies||[]).length?'<div class="card-row" style="margin-top:6px">'+
+          (c.allergies||[]).map(function(a){return '<span class="tag red">⚠ '+nm(a)+'</span>';}).join('')+
+        '</div>':'')+
+      '</div>'+
+      '<div class="card-footer"><span class="card-date">Updated '+c.updated+'</span></div>'+
+    '</div>';
+  }).join('');
+  grid.querySelectorAll('.card').forEach(function(el){
+    el.addEventListener('click',function(){openModal(el.dataset.id);});
+  });
 }
 
-// ===== MODAL =====
-function openModal(id) {
-  const c = cards.find(x => x.id === id);
-  if (!c) return;
+function openModal(id){
+  var c=cards.find(function(x){return x.id===id;});
+  if(!c)return;
+  document.getElementById('m_title').textContent=c.procedure;
+  document.getElementById('m_meta').innerHTML=
+    '<span>👨‍⚕️ '+c.surgeon+'</span><span>🏥 '+c.specialty+'</span>'+
+    (c.laterality?'<span>↔ '+c.laterality+'</span>':'')+
+    (c.anesthesia?'<span>💉 '+c.anesthesia+'</span>':'')+
+    (c.position?'<span>🛏️ '+c.position+'</span>':'')+
+    (c.duration?'<span>⏱ '+c.duration+'</span>':'')+
+    '<span style="color:var(--text-dim)">Updated '+c.updated+'</span>';
 
-  document.getElementById('m_title').textContent = c.procedure;
-  document.getElementById('m_meta').innerHTML = `
-    <span>👨‍⚕️ ${c.surgeon}</span>
-    <span>🏥 ${c.specialty}</span>
-    ${c.laterality ? `<span>↔ ${c.laterality}</span>` : ''}
-    ${c.anesthesia ? `<span>💉 ${c.anesthesia}</span>` : ''}
-    ${c.position ? `<span>🛏️ ${c.position}</span>` : ''}
-    ${c.duration ? `<span>⏱ ${c.duration}</span>` : ''}
-    <span style="color:var(--text-dim)">Updated ${c.updated}</span>
-  `;
-
-  const sections = [
-    ['🛏️ Positioning & Equipment', [...(c.positioning||[]), ...(c.equipment||[])], ''],
-    ['🔧 Instrument Sets', c.instruments||[], 'green'],
-    ['🔩 Additional Instruments', c.extra_instruments||[], 'green'],
-    ['🧵 Sutures', c.sutures||[], 'blue'],
-    ['🧴 Skin Prep & Draping', c.prep||[], ''],
-    ['🧻 Sponges & Counts', c.sponges||[], ''],
-    ['📦 Implants / Prosthetics', c.implants||[], 'warn'],
-    ['💊 Medications on Field', c.meds||[], 'warn'],
-    ['🗃️ Special Supplies', c.supplies||[], ''],
-    ['⚠️ Allergies / Contraindications', c.allergies||[], 'red'],
+  var sections=[
+    ['🛏️ Positioning & Equipment',(c.positioning||[]).concat(c.equipment||[]),''],
+    ['🔧 Instrument Sets',c.instruments||[],'green'],
+    ['🔩 Additional Instruments',c.extra_instruments||[],'green'],
+    ['🧵 Sutures',c.sutures||[],'blue'],
+    ['🧴 Skin Prep & Draping',c.prep||[],''],
+    ['🧻 Sponges & Counts',c.sponges||[],''],
+    ['📦 Implants / Prosthetics',c.implants||[],'warn'],
+    ['💊 Medications on Field',c.meds||[],'warn'],
+    ['🗃️ Special Supplies',c.supplies||[],''],
+    ['⚠️ Allergies / Contraindications',c.allergies||[],'red']
   ];
 
-  function renderItems(items, color) {
-    return items.map(v => {
-      const name = typeof v === 'string' ? v : v.name;
-      const instr = typeof v === 'object' ? v.instructions : '';
-      return `<div class="item-entry">
-        <div class="item-name-row"><span class="tag ${color}">${name}</span></div>
-        ${instr ? `<div class="item-instr">⚙ ${instr}</div>` : ''}
-      </div>`;
+  function renderItems(items,color){
+    return items.map(function(v){
+      var name=typeof v==='string'?v:v.name;
+      var instr=typeof v==='object'?v.instructions:'';
+      return '<div class="item-entry"><div><span class="tag '+color+'">'+name+'</span></div>'+
+        (instr?'<div class="item-instr">⚙ '+instr+'</div>':'')+
+      '</div>';
     }).join('');
   }
 
-  let html = sections.filter(([,items]) => items.length > 0).map(([title, items, color]) => `
-    <div class="section">
-      <div class="section-title">${title}</div>
-      <div>${renderItems(items, color)}</div>
-    </div>
-  `).join('');
+  var html=sections.filter(function(s){return s[1].length>0;}).map(function(s){
+    return '<div class="section"><div class="section-title">'+s[0]+'</div><div>'+renderItems(s[1],s[2])+'</div></div>';
+  }).join('');
+  if(c.surgeon_notes)html+='<div class="section"><div class="section-title">⭐ Surgeon Preferences</div><div class="notes-box">'+c.surgeon_notes+'</div></div>';
+  if(c.notes)html+='<div class="section"><div class="section-title">📝 Additional Notes</div><div class="notes-box">'+c.notes+'</div></div>';
+  document.getElementById('m_body').innerHTML=html||'<div style="color:var(--text-muted)">No detailed information added.</div>';
 
-  if (c.surgeon_notes) html += `<div class="section"><div class="section-title">⭐ Surgeon Preferences</div><div class="notes-box">${c.surgeon_notes}</div></div>`;
-  if (c.notes) html += `<div class="section"><div class="section-title">📝 Additional Notes</div><div class="notes-box">${c.notes}</div></div>`;
-
-  document.getElementById('m_body').innerHTML = html || '<div style="color:var(--text-muted)">No detailed information added.</div>';
-
-  document.getElementById('m_actions').innerHTML = `
-    <button class="btn btn-secondary" onclick="editCard('${c.id}')">✏️ Edit Card</button>
-    <button class="btn btn-secondary btn-sm" onclick="printCard('${c.id}')">🖨️ Print</button>
-    <button class="btn btn-danger btn-sm" onclick="deleteCard('${c.id}')" style="margin-left:auto">🗑️ Delete</button>
-  `;
+  var actEl=document.getElementById('m_actions');
+  actEl.innerHTML='';
+  var eb=document.createElement('button');eb.className='btn btn-secondary';eb.textContent='✏️ Edit Card';
+  eb.addEventListener('click',function(){editCard(c.id);});
+  var pb=document.createElement('button');pb.className='btn btn-secondary btn-sm';pb.textContent='🖨️ Print';
+  pb.addEventListener('click',function(){printCard(c.id);});
+  var db=document.createElement('button');db.className='btn btn-danger btn-sm';db.textContent='🗑️ Delete';
+  db.style.marginLeft='auto';
+  db.addEventListener('click',function(){deleteCard(c.id);});
+  actEl.appendChild(eb);actEl.appendChild(pb);actEl.appendChild(db);
 
   document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
 
-function closeModal(e) {
-  if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
-}
-
-function closeModalDirect() {
+function closeModal(){
   document.getElementById('modalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
+  document.body.style.overflow='';
 }
 
-function printCard(id) {
-  const c = cards.find(x => x.id === id);
-  if (!c) return;
-  const w = window.open('', '_blank');
-  const allSections = [
-    ['Positioning & Equipment', [...(c.positioning||[]), ...(c.equipment||[])]],
-    ['Instrument Sets', c.instruments||[]],
-    ['Additional Instruments', c.extra_instruments||[]],
-    ['Sutures', c.sutures||[]],
-    ['Skin Prep & Draping', c.prep||[]],
-    ['Sponges & Counts', c.sponges||[]],
-    ['Implants / Prosthetics', c.implants||[]],
-    ['Medications on Field', c.meds||[]],
-    ['Special Supplies', c.supplies||[]],
-    ['Allergies / Contraindications', c.allergies||[]],
+function printCard(id){
+  var c=cards.find(function(x){return x.id===id;});if(!c)return;
+  var secs=[
+    ['Positioning & Equipment',(c.positioning||[]).concat(c.equipment||[])],
+    ['Instrument Sets',c.instruments||[]],['Additional Instruments',c.extra_instruments||[]],
+    ['Sutures',c.sutures||[]],['Skin Prep & Draping',c.prep||[]],
+    ['Sponges & Counts',c.sponges||[]],['Implants / Prosthetics',c.implants||[]],
+    ['Medications on Field',c.meds||[]],['Special Supplies',c.supplies||[]],
+    ['Allergies / Contraindications',c.allergies||[]]
   ];
-  w.document.write(`<!DOCTYPE html><html><head><title>Preference Card - ${c.procedure}</title>
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; font-size: 13px; color: #111; }
-    h1 { font-size: 22px; margin-bottom: 4px; }
-    .meta { color: #555; font-size: 12px; margin-bottom: 20px; display: flex; gap: 16px; flex-wrap: wrap; }
-    h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #777; margin-bottom: 6px; border-bottom: 1px solid #ddd; padding-bottom: 4px; margin-top: 16px; }
-    .item { margin-bottom: 6px; }
-    .tag { display: inline-block; background: #f0f0f0; border: 1px solid #ddd; padding: 2px 10px; border-radius: 3px; font-size: 12px; }
-    .instr { font-size: 11px; color: #0066cc; background: #f0f6ff; border: 1px solid #c0d8f0; padding: 3px 10px; border-radius: 3px; margin-top: 3px; }
-    .notes { background: #f9f9f9; border: 1px solid #ddd; padding: 12px; border-radius: 4px; white-space: pre-wrap; }
-    @media print { body { margin: 20px; } }
-  </style></head><body>
+  var w=window.open('','_blank');
+  w.document.write('<!DOCTYPE html><html><head><title>'+c.procedure+'</title><style>body{font-family:Arial,sans-serif;max-width:800px;margin:40px auto;font-size:13px;color:#111}h1{font-size:22px;margin-bottom:4px}.meta{color:#555;font-size:12px;margin-bottom:20px;display:flex;gap:16px;flex-wrap:wrap}h3{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#777;margin-bottom:6px;border-bottom:1px solid #ddd;padding-bottom:4px;margin-top:16px}.item{margin-bottom:6px}.tag{display:inline-block;background:#f0f0f0;border:1px solid #ddd;padding:2px 10px;border-radius:3px;font-size:12px}.instr{font-size:11px;color:#0066cc;background:#f0f6ff;border:1px solid #c0d8f0;padding:3px 10px;border-radius:3px;margin-top:3px}.notes{background:#f9f9f9;border:1px solid #ddd;padding:12px;border-radius:4px;white-space:pre-wrap}@media print{body{margin:20px}}</style></head><body>'+
 
-  <h1>${c.procedure}</h1>
-  <div class="meta">
-    <span>Surgeon: ${c.surgeon}</span> <span>Specialty: ${c.specialty}</span>
-    ${c.laterality?`<span>${c.laterality}</span>`:''}
-    ${c.anesthesia?`<span>Anesthesia: ${c.anesthesia}</span>`:''}
-    ${c.position?`<span>Position: ${c.position}</span>`:''}
-    ${c.duration?`<span>Duration: ${c.duration}</span>`:''}
-    <span>Updated: ${c.updated}</span>
-  </div>
-  ${allSections.filter(([,items])=>items.length>0).map(([title,items])=>`
-    <h3>${title}</h3>
-    ${items.map(v => {
-      const name = typeof v === 'string' ? v : v.name;
-      const instr = typeof v === 'object' ? v.instructions : '';
-      return `<div class="item"><span class="tag">${name}</span>${instr ? `<div class="instr">⚙ ${instr}</div>` : ''}</div>`;
-    }).join('')}
-  `).join('')}
-  ${c.surgeon_notes?`<h3>Surgeon Preferences</h3><div class="notes">${c.surgeon_notes}</div>`:''}
-  ${c.notes?`<h3>Additional Notes</h3><div class="notes">${c.notes}</div>`:''}
-  </body></html>`);
-  w.document.close();
-  w.print();
+```
+'<h1>'+c.procedure+'</h1><div class="meta"><span>Surgeon: '+c.surgeon+'</span><span>Specialty: '+c.specialty+'</span>'+
+(c.laterality?'<span>'+c.laterality+'</span>':'')+(c.anesthesia?'<span>Anesthesia: '+c.anesthesia+'</span>':'')+
+(c.position?'<span>Position: '+c.position+'</span>':'')+(c.duration?'<span>Duration: '+c.duration+'</span>':'')+
+'<span>Updated: '+c.updated+'</span></div>'+
+secs.filter(function(s){return s[1].length>0;}).map(function(s){
+  return '<h3>'+s[0]+'</h3>'+s[1].map(function(v){
+    var name=typeof v==='string'?v:v.name;var instr=typeof v==='object'?v.instructions:'';
+    return '<div class="item"><span class="tag">'+name+'</span>'+(instr?'<div class="instr">⚙ '+instr+'</div>':'')+'</div>';
+  }).join('');
+}).join('')+
+(c.surgeon_notes?'<h3>Surgeon Preferences</h3><div class="notes">'+c.surgeon_notes+'</div>':'')+
+(c.notes?'<h3>Additional Notes</h3><div class="notes">'+c.notes+'</div>':'')+
+'</body></html>');
+```
+
+w.document.close();w.print();
 }
 
-// ===== FILTERS & STATS =====
-function updateSpecialtyFilter() {
-const specialties = […new Set(cards.map(c => c.specialty))].sort();
-const sel = document.getElementById(‘specialtyFilter’);
-const cur = sel.value;
-sel.innerHTML = ‘<option value="">All Specialties</option>’ + specialties.map(s => `<option ${s===cur?'selected':''}>${s}</option>`).join(’’);
+function updateSpecialtyFilter(){
+var specialties=[…new Set(cards.map(function(c){return c.specialty;}))].sort();
+var sel=document.getElementById(‘specialtyFilter’);
+var cur=sel.value;
+sel.innerHTML=’<option value="">All Specialties</option>’+specialties.map(function(s){return ‘<option’+(s===cur?’ selected’:’’)+’>’+s+’</option>’;}).join(’’);
 }
 
-function updateStats() {
-const specialties = new Set(cards.map(c => c.specialty)).size;
-const surgeons = new Set(cards.map(c => c.surgeon)).size;
-document.getElementById(‘statsBar’).innerHTML = cards.length === 0 ? ‘’ : `<div class="stat"><span class="stat-value">${cards.length}</span><span class="stat-label">Total Cards</span></div> <div class="divider"></div> <div class="stat"><span class="stat-value">${surgeons}</span><span class="stat-label">Surgeons</span></div> <div class="divider"></div> <div class="stat"><span class="stat-value">${specialties}</span><span class="stat-label">Specialties</span></div>`;
+function updateStats(){
+var sp=new Set(cards.map(function(c){return c.specialty;})).size;
+var su=new Set(cards.map(function(c){return c.surgeon;})).size;
+document.getElementById(‘statsBar’).innerHTML=cards.length===0?’’:
+‘<div class="stat"><span class="stat-value">’+cards.length+’</span><span class="stat-label">Total Cards</span></div>’+
+‘<div class="divider"></div>’+
+‘<div class="stat"><span class="stat-value">’+su+’</span><span class="stat-label">Surgeons</span></div>’+
+‘<div class="divider"></div>’+
+‘<div class="stat"><span class="stat-value">’+sp+’</span><span class="stat-label">Specialties</span></div>’;
 }
 
-// ===== ALERT =====
-function showAlert(msg, isError = false) {
-const box = document.getElementById(‘alertBox’);
-document.getElementById(‘alertMsg’).textContent = msg;
-box.style.borderColor = isError ? ‘var(–accent3)’ : ‘var(–accent)’;
+function showAlert(msg,isError){
+var box=document.getElementById(‘alertBox’);
+document.getElementById(‘alertMsg’).textContent=msg;
+box.style.borderColor=isError?‘var(–accent3)’:‘var(–accent)’;
 box.classList.add(‘show’);
-setTimeout(() => box.classList.remove(‘show’), 3000);
+setTimeout(function(){box.classList.remove(‘show’);},3000);
 }
 
-// ===== SEED DATA (demo cards) =====
-function seedIfEmpty() {
-if (cards.length > 0) return;
-cards = [
-{
-id: ‘1’, surgeon: ‘Dr. Sarah Chen’, specialty: ‘Orthopedics’, procedure: ‘Total Knee Arthroplasty’,
-laterality: ‘Right’, duration: ‘90 min’, anesthesia: ‘Spinal’, position: ‘Supine’,
-positioning: [‘Leg holder/knee positioner’, ‘Tourniquet – right thigh 300 mmHg’],
-equipment: [‘Pulsed lavage system’, ‘Cement mixing system’, ‘Pneumatic tourniquet machine’],
-instruments: [‘Orthopedic Basic Set’, ‘TKA Instrument Set – Zimmer Persona’],
-extra_instruments: [‘Army-Navy retractors x2’, ‘Hohmann retractors x4’, ‘Electrocautery – Bovie’],
-sutures: [‘0-Vicryl CT-1 x3’, ‘2-0 Vicryl SH x2’, ‘3-0 Monocryl PS-2 x2’, ‘Staples – 35 wide’],
-prep: [‘ChloraPrep 26mL x1’, ‘Ioban drape x1’, ‘TKA drape pack’],
-sponges: [‘Laps x20’, ‘Ray-Tecs x20’, ‘4x4 sponges x10’],
-implants: [‘Zimmer Persona TKA System – Size 4C’, ‘Tibial tray + poly insert’, ‘Patellar button’],
-meds: [‘Heparin 5000u/500mL NS’, ‘Vancomycin powder 1g’, ‘Epinephrine 1:500K’],
-supplies: [‘Bone cement – Simplex P x2’, ‘HEPA suit hood – surgeon preference’],
-allergies: [‘No latex products’],
-surgeon_notes: ‘Dr. Chen prefers pulsed lavage before cementing. Always confirm implant sizes with surgeon before opening. Cement gun must be primed before handing off.’,
-notes: ‘Count must be completed before tourniquet release. Surgeon prefers no music during critical steps.’,
-updated: ‘Mar 1, 2026’
-},
-{
-id: ‘2’, surgeon: ‘Dr. Marcus Webb’, specialty: ‘General Surgery’, procedure: ‘Laparoscopic Cholecystectomy’,
-laterality: ‘’, duration: ‘45 min’, anesthesia: ‘General’, position: ‘Supine’,
-positioning: [‘Bean bag’, ‘Left arm tucked’, ‘Reverse Trendelenburg 15°’],
-equipment: [‘Laparoscopic tower – Karl Storz’, ‘Insufflator’, ‘LigaSure device’],
-instruments: [‘Laparoscopic Basic Set’, ‘Clip applier 10mm’],
-extra_instruments: [‘Maryland dissector’, ‘Hook electrocautery’, ‘Fan retractor’],
-sutures: [‘0-Vicryl CT-1 x1 (port closure)’, ‘4-0 Monocryl PS-2 x2 (skin)’],
-prep: [‘ChloraPrep 26mL x1’, ‘Laparoscopic drape pack’],
-sponges: [‘4x4 sponges x10’, ‘Laps x5’],
-implants: [],
-meds: [‘Heparin flush 10u/mL’, ‘Morphine 4mg/2mL on field’],
-supplies: [‘CO2 gas tank – verify before case’, ‘10mm trocar x1’, ‘5mm trocar x3’],
-allergies: [],
-surgeon_notes: ‘Dr. Webb always uses the critical view of safety technique. Have clips loaded before dissection begins. Prefers 30° scope.’,
-notes: ‘Patient often claustrophobic – ensure quick mask induction. Confirm NPO status.’,
-updated: ‘Feb 28, 2026’
-}
+function seedIfEmpty(){
+if(cards.length>0)return;
+cards=[
+{id:‘1’,surgeon:‘Dr. Sarah Chen’,specialty:‘Orthopedics’,procedure:‘Total Knee Arthroplasty’,
+laterality:‘Right’,duration:‘90 min’,anesthesia:‘Spinal’,position:‘Supine’,
+positioning:[{name:‘Leg holder/knee positioner’},{name:‘Tourniquet – right thigh’,instructions:‘Inflate to 300 mmHg, document time on’}],
+equipment:[{name:‘Pulsed lavage system’,instructions:‘Set to pulse mode, 500mL NS bags x3’},{name:‘Cement mixing system’},{name:‘Pneumatic tourniquet machine’}],
+instruments:[{name:‘Orthopedic Basic Set’},{name:‘TKA Instrument Set – Zimmer Persona’}],
+extra_instruments:[{name:‘Army-Navy retractors x2’},{name:‘Hohmann retractors x4’},{name:‘Electrocautery – Bovie’,instructions:‘Set coag 30W / cut 25W’}],
+sutures:[{name:‘0-Vicryl CT-1 x3’},{name:‘2-0 Vicryl SH x2’},{name:‘3-0 Monocryl PS-2 x2’},{name:‘Staples – 35 wide’}],
+prep:[{name:‘ChloraPrep 26mL x1’},{name:‘Ioban drape x1’},{name:‘TKA drape pack’}],
+sponges:[{name:‘Laps x20’},{name:‘Ray-Tecs x20’},{name:‘4x4 sponges x10’}],
+implants:[{name:‘Zimmer Persona TKA System – Size 4C’,instructions:‘Confirm size with surgeon before opening’},{name:‘Tibial tray + poly insert’},{name:‘Patellar button’}],
+meds:[{name:‘Heparin 5000u/500mL NS’},{name:‘Vancomycin powder 1g’,instructions:‘Mix with 10mL sterile water, apply topically before closure’},{name:‘Epinephrine 1:500K’}],
+supplies:[{name:‘Bone cement – Simplex P x2’,instructions:‘Mix per package insert, prime gun before hand-off’},{name:‘HEPA suit hood – surgeon preference’}],
+allergies:[{name:‘No latex products’}],
+surgeon_notes:‘Dr. Chen prefers pulsed lavage before cementing. Always confirm implant sizes with surgeon before opening.’,
+notes:‘Count must be completed before tourniquet release. Surgeon prefers no music during critical steps.’,
+updated:‘Mar 1, 2026’},
+{id:‘2’,surgeon:‘Dr. Marcus Webb’,specialty:‘General Surgery’,procedure:‘Laparoscopic Cholecystectomy’,
+laterality:’’,duration:‘45 min’,anesthesia:‘General’,position:‘Supine’,
+positioning:[{name:‘Bean bag’},{name:‘Left arm tucked’},{name:‘Reverse Trendelenburg 15°’}],
+equipment:[{name:‘Laparoscopic tower – Karl Storz’,instructions:‘White balance and focus scope before draping’},{name:‘Insufflator’,instructions:‘Set to 15 mmHg’},{name:‘LigaSure device’}],
+instruments:[{name:‘Laparoscopic Basic Set’},{name:‘Clip applier 10mm’}],
+extra_instruments:[{name:‘Maryland dissector’},{name:‘Hook electrocautery’,instructions:‘Set to 30W coag’},{name:‘Fan retractor’}],
+sutures:[{name:‘0-Vicryl CT-1 x1 (port closure)’},{name:‘4-0 Monocryl PS-2 x2 (skin)’}],
+prep:[{name:‘ChloraPrep 26mL x1’},{name:‘Laparoscopic drape pack’}],
+sponges:[{name:‘4x4 sponges x10’},{name:‘Laps x5’}],
+implants:[],
+meds:[{name:‘Heparin flush 10u/mL’},{name:‘Morphine 4mg/2mL on field’}],
+supplies:[{name:‘CO2 gas tank – verify before case’,instructions:‘Tank must be over 1/4 full, have backup ready’},{name:‘10mm trocar x1’},{name:‘5mm trocar x3’}],
+allergies:[],
+surgeon_notes:‘Dr. Webb always uses the critical view of safety technique. Have clips loaded before dissection begins. Prefers 30° scope.’,
+notes:‘Patient often claustrophobic – ensure quick mask induction.’,
+updated:‘Feb 28, 2026’}
 ];
-save();
+persist();
 }
 
-// ===== INIT =====
-document.addEventListener(‘DOMContentLoaded’, function() {
+document.addEventListener(‘DOMContentLoaded’,function(){
 seedIfEmpty();
-buildDictionary();
-updateBadge();
-updateSpecialtyFilter();
-updateStats();
-renderCards();
-updatePreview();
+buildDictionary();updateBadge();updateSpecialtyFilter();updateStats();renderCards();updatePreview();
 
-// Keyboard close modal
-document.addEventListener(‘keydown’, e => { if (e.key === ‘Escape’) closeModalDirect(); });
+document.getElementById(‘navViewer’).addEventListener(‘click’,function(){showTab(‘viewer’);});
+document.getElementById(‘navBuilder’).addEventListener(‘click’,function(){showTab(‘builder’);});
+document.getElementById(‘newCardBtn’).addEventListener(‘click’,function(){showTab(‘builder’);});
+document.getElementById(‘saveCardBtn’).addEventListener(‘click’,saveCard);
+document.getElementById(‘clearFormBtn’).addEventListener(‘click’,clearForm);
+document.getElementById(‘cancelEditBtn’).addEventListener(‘click’,function(){editingId=null;document.getElementById(‘editIndicator’).classList.remove(‘show’);clearForm();});
+document.getElementById(‘closeModalBtn’).addEventListener(‘click’,closeModal);
+document.getElementById(‘modalOverlay’).addEventListener(‘click’,function(e){if(e.target===this)closeModal();});
+document.getElementById(‘searchInput’).addEventListener(‘input’,renderCards);
+document.getElementById(‘specialtyFilter’).addEventListener(‘change’,renderCards);
 
-// Close dropdowns on outside click
-document.addEventListener(‘mousedown’, e => {
-document.querySelectorAll(’.ac-dropdown.open’).forEach(d => {
-if (!d.parentElement.contains(e.target)) d.classList.remove(‘open’);
+document.querySelectorAll(’.add-item-btn’).forEach(function(btn){
+btn.addEventListener(‘click’,function(){addItem(btn.dataset.list,btn.dataset.ph);});
 });
+
+attachFieldAC(‘f_surgeon’,‘surgeons’);
+attachFieldAC(‘f_specialty’,‘specialties’);
+attachFieldAC(‘f_procedure’,‘procedures’);
+
+[‘f_surgeon’,‘f_specialty’,‘f_procedure’,‘f_duration’,‘f_surgeon_notes’,‘f_notes’].forEach(function(id){
+document.getElementById(id).addEventListener(‘input’,updatePreview);
 });
+[‘f_laterality’,‘f_anesthesia’,‘f_position’].forEach(function(id){
+document.getElementById(id).addEventListener(‘change’,updatePreview);
 });
+
+document.addEventListener(‘mousedown’,function(e){
+document.querySelectorAll(’.ac-dropdown.open’).forEach(function(d){if(!d.contains(e.target))d.classList.remove(‘open’);});
+});
+document.addEventListener(‘keydown’,function(e){if(e.key===‘Escape’)closeModal();});
+});
+
+})();
 </script>
 
 </body>
