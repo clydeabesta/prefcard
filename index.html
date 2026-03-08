@@ -386,8 +386,15 @@
 (function(){
 'use strict';
 
+// Safe storage wrapper — falls back to memory if localStorage is blocked (Safari/iOS)
+var _memStore={};
+var storage={
+  getItem:function(k){try{return localStorage.getItem(k);}catch(e){return _memStore[k]||null;}},
+  setItem:function(k,v){try{localStorage.setItem(k,v);}catch(e){_memStore[k]=v;}}
+};
+
 var cards=[];
-try{cards=JSON.parse(localStorage.getItem('or_pref_cards')||'[]');}catch(e){cards=[];}
+try{cards=JSON.parse(storage.getItem('or_pref_cards')||'[]');}catch(e){cards=[];}
 var editingId=null;
 
 var listToCategory={
@@ -543,7 +550,7 @@ function getListNames(listId){return getListValues(listId).map(nm);}
 function clearList(id){document.getElementById(id).innerHTML='';}
 
 function persist(){
-  try{localStorage.setItem('or_pref_cards',JSON.stringify(cards));}catch(e){}
+  try{storage.setItem('or_pref_cards',JSON.stringify(cards));}catch(e){}
   buildDictionary();updateBadge();updateSpecialtyFilter();updateStats();
 }
 
