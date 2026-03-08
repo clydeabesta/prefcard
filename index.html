@@ -1107,13 +1107,6 @@ function acKeydown(e, input) {
   }
 }
 
-// Close dropdowns on outside click
-document.addEventListener('mousedown', e => {
-  document.querySelectorAll('.ac-dropdown.open').forEach(d => {
-    if (!d.parentElement.contains(e.target)) d.classList.remove('open');
-  });
-});
-
 // For list row inputs (instruments, sutures etc)
 function acListField(input, category) {
   let drop = input.parentElement.querySelector('.ac-dropdown');
@@ -1618,6 +1611,7 @@ save();
 }
 
 // ===== INIT =====
+document.addEventListener(‘DOMContentLoaded’, function() {
 seedIfEmpty();
 buildDictionary();
 updateBadge();
@@ -1628,6 +1622,14 @@ updatePreview();
 
 // Keyboard close modal
 document.addEventListener(‘keydown’, e => { if (e.key === ‘Escape’) closeModalDirect(); });
+
+// Close dropdowns on outside click
+document.addEventListener(‘mousedown’, e => {
+document.querySelectorAll(’.ac-dropdown.open’).forEach(d => {
+if (!d.parentElement.contains(e.target)) d.classList.remove(‘open’);
+});
+});
+});
 </script>
 
 </body>
